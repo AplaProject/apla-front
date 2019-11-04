@@ -14,8 +14,9 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import themed from 'components/Theme/themed';
 import { Link } from 'react-router-dom';
+import themed from 'components/Theme/themed';
+import LinkButton from 'components/Form/LinkButton';
 
 interface Props {
     className?: string;
@@ -30,9 +31,9 @@ const Welcome: React.SFC<Props> = props => (
         </div>
 
         <div className="welcome__block">
-            <Link to="/signup" className="welcome__signup">
+            <LinkButton to="/signup" className="welcome__button">
                 Sign up
-            </Link>
+            </LinkButton>
         </div>
 
         <div className="welcome__block">
@@ -55,18 +56,8 @@ export default themed(Welcome)`
         font-weight: 500;
     }
 
-    & .welcome__signup {
-        background: #d8d1c7;
-        border: 0;
-        text-transform: uppercase;
-        color: #7a623e;
-        border-radius: 31px;
-        padding: 10px;
+    & .welcome__button {
         min-width: 260px;
-        font-size: 16px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
     }
 
     & .welcome__recover {
