@@ -1,25 +1,14 @@
 {
-    "extends": [
-        "tslint-react"
-    ],
+    "extends": ["tslint-react"],
     "rules": {
         "ban": false,
         "class-name": true,
-        "comment-format": [
-            true,
-            "check-space"
-        ],
+        "comment-format": [true, "check-space"],
         "curly": true,
         "eofline": false,
         "forin": true,
-        "indent": [
-            true,
-            "spaces",
-            4
-        ],
-        "interface-name": [
-            false
-        ],
+        "indent": [true, "spaces", 4],
+        "interface-name": [false],
         "jsdoc-format": true,
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
@@ -60,11 +49,7 @@
         "no-trailing-whitespace": false,
         "no-unused-expression": true,
         "no-use-before-declare": true,
-        "one-line": [
-            true,
-            "check-open-brace",
-            "check-whitespace"
-        ],
+        "one-line": [true, "check-open-brace", "check-whitespace"],
         "quotemark": [
             true,
             "single",
@@ -73,21 +58,11 @@
             "avoid-escape"
         ],
         "radix": true,
-        "semicolon": [
-            true,
-            "always"
-        ],
+        "semicolon": [true, "always", "ignore-bound-class-methods"],
         "switch-default": true,
         "trailing-comma": false,
-        "triple-equals": [
-            true,
-            "allow-null-check"
-        ],
-        "typedef": [
-            true,
-            "parameter",
-            "property-declaration"
-        ],
+        "triple-equals": [true, "allow-null-check"],
+        "typedef": [true, "parameter", "property-declaration"],
         "typedef-whitespace": [
             true,
             {
