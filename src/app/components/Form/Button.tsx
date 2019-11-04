@@ -21,7 +21,6 @@ export default themed.button`
     color: #7a623e;
     border-radius: 31px;
     padding: 10px;
-    min-width: 260px;
     font-size: 16px;
     text-align: center;
     text-decoration: none;

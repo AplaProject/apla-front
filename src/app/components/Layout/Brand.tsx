@@ -37,7 +37,7 @@ export default themed(Brand)`
     grid-template-areas: 'logo content';
     grid-column-gap: 50px;
     align-items: center;
-    padding: 50px;
+    margin: 50px;
     height: 100vh;
 
     & .brand__logo {
@@ -51,7 +51,7 @@ export default themed(Brand)`
     @media (${media.md}) {
         grid-template-columns: 0 1fr;
         grid-column-gap: 0;
-        padding: 0;
+        margin: 15px;
 
         & .brand__logo {
             display: none;
