@@ -18,9 +18,10 @@ export default class extends React.Component {
     render() {
         return (
             <div className="preloader">
-                <div className="content">
-                    <div className="loader" />
-                    <div className="version">
+                <div className="preloader__overlay">
+                    <div className="preloader__logo" />
+                    <div className="preloader__brand" />
+                    <div className="preloader__version">
                         {process.env.REACT_APP_VERSION}
                     </div>
                 </div>

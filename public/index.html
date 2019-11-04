@@ -24,13 +24,14 @@
     <link href="/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <style type="text/css">
         body {
-            background: #272d44;
+            background: #38393a;
         }
 
         .preloader {
             font-size: 0;
-            background: url(/icons/icon.svg) center center no-repeat #3873a6;
-            background-size: auto 20%;
+            background: linear-gradient(#4C4D4E, #252627);
+            /* background: url(/icons/icon.svg) center center no-repeat; */
+            background-size: auto;
             position: fixed;
             top: 0;
             left: 0;
@@ -40,30 +41,44 @@
             display: table;
         }
 
-        .preloader .content {
-            display: table-cell;
-            vertical-align: middle;
-            height: 100%;
-            padding: 10px;
+        .preloader__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url(/img/back.png) repeat;
         }
 
-        .preloader .content>.loader {
-            position: relative;
-            width: 300px;
-            height: 65px;
-            margin: 0 auto;
+        .preloader__logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url(/icons/icon.svg) center center no-repeat;
+            background-size: auto;
+            opacity: 0.03;
+            z-index: 0;
         }
 
-        .preloader .content>.loader svg,
-        .preloader .content>.loader .logo {
-            max-width: 100%;
+        .preloader__brand {
+            background: url(/img/logoText.svg) center center no-repeat;
+            background-size: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
         }
 
-        .preloader .version {
+        .preloader__version {
             position: absolute;
             bottom: 10px;
             left: 15px;
-            color: #92aac7;
+            color: #fff;
+            opacity: 0.5;
             font-size: 16px;
             font-weight: bold;
         }
@@ -124,11 +139,12 @@
         You need to enable JavaScript to run this app.
     </noscript>
     <div id="root">
-        <div class="preloader">
-            <div class="content">
-                <div class="loader" />
+        <div className="preloader">
+            <div className="preloader__overlay">
+                <div className="preloader__logo" />
+                <div className="preloader__brand" />
             </div>
-        </div>
+        </div> 
     </div>
 </body>
 
