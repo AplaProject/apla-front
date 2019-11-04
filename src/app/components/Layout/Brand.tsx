@@ -37,7 +37,7 @@ export default themed(Brand)`
     grid-template-areas: 'logo content';
     grid-column-gap: 50px;
     align-items: center;
-    margin: 50px;
+    padding: 50px;
     height: 100vh;
 
     & .brand__logo {
@@ -48,10 +48,25 @@ export default themed(Brand)`
         grid-area: content;
     }
 
+    @media (${media.lg}) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 5% 1fr;
+        grid-template-areas:
+            'logo'
+            'content';
+        padding: 70px 50px 50px 50px;
+        
+        & .brand__logo {
+            margin-top: 25px;
+        }
+    }
+
     @media (${media.md}) {
         grid-template-columns: 0 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 'logo content';
         grid-column-gap: 0;
-        margin: 15px;
+        padding: 15px;
 
         & .brand__logo {
             display: none;
