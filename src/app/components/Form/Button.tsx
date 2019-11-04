@@ -12,32 +12,34 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import React from 'react';
 import themed from 'components/Theme/themed';
-import classNames from 'classnames';
 
-interface Props {
-    className?: string;
-    disabled?: boolean;
-}
+export default themed.button`
+    background: #d8d1c7;
+    border: 0;
+    text-transform: uppercase;
+    color: #7a623e;
+    border-radius: 31px;
+    padding: 10px;
+    min-width: 260px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 
-const Label: React.SFC<Props> = props => (
-    <div
-        className={classNames(props.className, {
-            label_disabled: props.disabled
-        })}
-    >
-        {props.children}
-    </div>
-);
+    &:hover {
+        background: #dcd6cd;
+        text-decoration: none;
+        color: #7a623e;
+    }
 
-export default themed(Label)`
-    color: #888;
-    font-weight: 400;
-    font-size: 13px;
-    margin: 5px 0 0 15px;
+    &:disabled {
+        background: #ece9e4;
+        color: #c5bcad;
+    }
 
-    &.label_disabled {
-        color: #ccc;
+    &.block {
+        box-sizing: border-box;
+        width: 100%;        
     }
 `;

@@ -16,6 +16,7 @@ import * as React from 'react';
 import { Validator } from './Validators';
 import * as propTypes from 'prop-types';
 
+import themed from 'components/Theme/themed';
 import ValidatedForm, { IValidatedControl } from './ValidatedForm';
 
 export interface IValidatedCheckboxProps {
@@ -34,7 +35,9 @@ interface IValidatedCheckboxState {
     checked: boolean;
 }
 
-export default class ValidatedCheckbox extends React.Component<IValidatedCheckboxProps, IValidatedCheckboxState> implements IValidatedControl {
+class ValidatedCheckbox
+    extends React.Component<IValidatedCheckboxProps, IValidatedCheckboxState>
+    implements IValidatedControl {
     constructor(props: IValidatedCheckboxProps) {
         super(props);
 
@@ -60,7 +63,10 @@ export default class ValidatedCheckbox extends React.Component<IValidatedCheckbo
             this.setState({
                 checked: props.checked
             });
-            (this.context.form as ValidatedForm).updateState(props.name, props.checked);
+            (this.context.form as ValidatedForm).updateState(
+                props.name,
+                props.checked
+            );
         }
     }
 
@@ -77,8 +83,11 @@ export default class ValidatedCheckbox extends React.Component<IValidatedCheckbo
             this.props.onChange(e);
         }
 
-        (this.context.form as ValidatedForm).emitUpdate(this.props.name, String(e.target.checked));
-    }
+        (this.context.form as ValidatedForm).emitUpdate(
+            this.props.name,
+            String(e.target.checked)
+        );
+    };
 
     onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         (this.context.form as ValidatedForm).updateState(this.props.name);
@@ -86,11 +95,13 @@ export default class ValidatedCheckbox extends React.Component<IValidatedCheckbo
         if (this.props.onBlur) {
             this.props.onBlur(e);
         }
-    }
+    };
 
     render() {
         return (
-            <div className={`checkbox c-checkbox ${this.props.className || ''}`}>
+            <div
+                className={this.props.className}
+            >
                 <label>
                     <input
                         type="checkbox"
@@ -101,7 +112,7 @@ export default class ValidatedCheckbox extends React.Component<IValidatedCheckbo
                         disabled={this.props.disabled}
                     />
                     <em className="fa fa-check" />
-                    <span>{this.props.title}</span>
+                    <span className="checkbox__label">{this.props.title}</span>
                 </label>
             </div>
         );
@@ -111,3 +122,39 @@ export default class ValidatedCheckbox extends React.Component<IValidatedCheckbo
 (ValidatedCheckbox as React.ComponentClass).contextTypes = {
     form: propTypes.instanceOf(ValidatedForm)
 };
+
+export default themed(ValidatedCheckbox)`
+    & input {
+        position: absolute;
+        top: -999999px;
+        left: -999999px;
+    }
+
+    & input:checked + .fa.fa-check {
+        background: #f2f0ed;
+
+        &:before {
+            visibility: visible;
+        }
+    }
+
+    & .fa.fa-check {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        border: solid 1px #7a623e;
+        background: #fff;
+        
+        &:before {
+            color: #7a623e;
+            visibility: hidden;
+            font-size: 12px;
+        }
+    }
+
+    & .checkbox__label {
+        margin-left: 10px;
+        font-size: 13px;
+        font-weight: 400;
+    }
+`;

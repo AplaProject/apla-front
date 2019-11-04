@@ -18,6 +18,7 @@ import { Validator } from './Validators';
 import * as propTypes from 'prop-types';
 
 import ValidatedForm, { IValidatedControl } from './ValidatedForm';
+import themed from 'components/Theme/themed';
 
 export interface IValidatedControlProps extends FormControlProps {
     name: string;
@@ -28,7 +29,9 @@ interface IValidatedControlState {
     value: string;
 }
 
-export default class ValidatedControl extends React.Component<IValidatedControlProps, IValidatedControlState> implements IValidatedControl {
+class ValidatedControl
+    extends React.Component<IValidatedControlProps, IValidatedControlState>
+    implements IValidatedControl {
     constructor(props: IValidatedControlProps) {
         super(props);
 
@@ -54,7 +57,10 @@ export default class ValidatedControl extends React.Component<IValidatedControlP
             this.setState({
                 value: props.value as string
             });
-            (this.context.form as ValidatedForm).updateState(props.name, props.value);
+            (this.context.form as ValidatedForm).updateState(
+                props.name,
+                props.value
+            );
         }
     }
 
@@ -71,8 +77,11 @@ export default class ValidatedControl extends React.Component<IValidatedControlP
             this.props.onChange(e);
         }
 
-        (this.context.form as ValidatedForm).emitUpdate(this.props.name, (e.target as any).value);
-    }
+        (this.context.form as ValidatedForm).emitUpdate(
+            this.props.name,
+            (e.target as any).value
+        );
+    };
 
     onBlur = (e: React.FocusEvent<FormControl>) => {
         if (this.context.form) {
@@ -82,7 +91,7 @@ export default class ValidatedControl extends React.Component<IValidatedControlP
         if (this.props.onBlur) {
             this.props.onBlur(e);
         }
-    }
+    };
 
     render() {
         return (
@@ -113,3 +122,19 @@ export default class ValidatedControl extends React.Component<IValidatedControlP
 (ValidatedControl as React.ComponentClass).contextTypes = {
     form: propTypes.instanceOf(ValidatedForm)
 };
+
+export default themed(ValidatedControl)`
+    &&& {
+        border: solid 1px #a5a5a5;
+        border-radius: 18px;
+        font-size: 16px;
+        padding: 6px 15px;
+        background: #fff;
+        height: auto;
+
+        &:disabled {
+            border-color: #ececec;
+            color: #ccc;
+        }
+    }
+`;

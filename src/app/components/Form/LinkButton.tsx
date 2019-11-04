@@ -12,32 +12,9 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import React from 'react';
-import themed from 'components/Theme/themed';
-import classNames from 'classnames';
+import Button from './Button';
+import { Link, LinkProps } from 'react-router-dom';
 
-interface Props {
-    className?: string;
-    disabled?: boolean;
-}
-
-const Label: React.SFC<Props> = props => (
-    <div
-        className={classNames(props.className, {
-            label_disabled: props.disabled
-        })}
-    >
-        {props.children}
-    </div>
-);
-
-export default themed(Label)`
-    color: #888;
-    font-weight: 400;
-    font-size: 13px;
-    margin: 5px 0 0 15px;
-
-    &.label_disabled {
-        color: #ccc;
-    }
-`;
+export default (Button.withComponent(
+    Link as any
+) as any) as React.ComponentType<LinkProps>;

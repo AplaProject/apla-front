@@ -17,6 +17,7 @@ import * as propTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import ValidatedForm from './ValidatedForm';
+import themed from 'components/Theme/themed';
 
 interface IValidationMessageProps {
     className?: string;
@@ -30,31 +31,45 @@ interface IValidationMessageContext {
     form: ValidatedForm;
 }
 
-const ValidationMessage: React.SFC<IValidationMessageProps> = (props, context: IValidationMessageContext) => {
+const ValidationMessage: React.SFC<IValidationMessageProps> = (
+    props,
+    context: IValidationMessageContext
+) => {
     let result = null;
 
     if (context.form) {
-        const value = !context.form.getState(props.for) && context.form.validate(props.for);
+        const value =
+            !context.form.getState(props.for) &&
+            context.form.validate(props.for);
         if (value && value.error) {
-            const message = props.messages && props.messages[value.validator.name];
+            const message =
+                props.messages && props.messages[value.validator.name];
             if (!message) {
                 result = (
-                    <FormattedMessage id={`validation.${value.validator.name}`} defaultMessage="This field contains invalid data" />
+                    <FormattedMessage
+                        id={`validation.${value.validator.name}`}
+                        defaultMessage="This field contains invalid data"
+                    />
                 );
-            }
-            else if ('string' === typeof message) {
+            } else if ('string' === typeof message) {
                 result = message;
-            }
-            else {
+            } else {
                 result = (
-                    <FormattedMessage id="validation.field.invalid" defaultMessage="This field contains invalid data" />
+                    <FormattedMessage
+                        id="validation.field.invalid"
+                        defaultMessage="This field contains invalid data"
+                    />
                 );
             }
         }
     }
 
     return (
-        <span className={props.className === undefined ? 'text-danger' : props.className}>
+        <span
+            className={
+                props.className === undefined ? 'text-danger' : props.className
+            }
+        >
             {result && (
                 <span>
                     <span>* </span>
@@ -69,4 +84,8 @@ ValidationMessage.contextTypes = {
     form: propTypes.instanceOf(ValidatedForm)
 };
 
-export default ValidationMessage;
+export default themed(ValidationMessage)`
+    margin-left: 15px;
+    color: ${props =>
+        props.className === undefined ? '#ff0000' : props.className};
+`;

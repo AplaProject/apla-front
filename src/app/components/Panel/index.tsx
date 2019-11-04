@@ -14,30 +14,18 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
-import classNames from 'classnames';
 
 interface Props {
     className?: string;
-    disabled?: boolean;
 }
 
-const Label: React.SFC<Props> = props => (
-    <div
-        className={classNames(props.className, {
-            label_disabled: props.disabled
-        })}
-    >
-        {props.children}
-    </div>
+const Panel: React.SFC<Props> = props => (
+    <div className={props.className}>{props.children}</div>
 );
 
-export default themed(Label)`
-    color: #888;
-    font-weight: 400;
-    font-size: 13px;
-    margin: 5px 0 0 15px;
-
-    &.label_disabled {
-        color: #ccc;
-    }
+export default themed(Panel)`
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 20px 50px 20px;
+    max-width: 600px;
 `;
