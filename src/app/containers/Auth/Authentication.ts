@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { push } from 'connected-react-router';
 
-import Auth from 'components/Auth/SignUp';
+import Authentication from 'components/Auth/Authentication';
 
 const mapStateToProps = (state: IRootState) => ({});
 
@@ -27,4 +27,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Auth);
+)(Authentication);

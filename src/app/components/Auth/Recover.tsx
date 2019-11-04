@@ -13,7 +13,10 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import React from 'react';
+import Authentication from 'containers/Auth/Authentication';
 
-const Recover: React.SFC = props => <div>Recover</div>;
+const Recover: React.SFC = () => (
+    <Authentication title="Recover Account" onReturn={undefined} />
+);
 
 export default Recover;

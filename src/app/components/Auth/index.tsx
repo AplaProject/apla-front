@@ -17,7 +17,7 @@ import { Route, Switch } from 'react-router';
 import Brand from 'components/Layout/Brand';
 import Welcome from './Welcome';
 import AccountList from 'containers/AccountList';
-import SignUp from 'containers/Auth/SignUp';
+import SignUp from './SignUp';
 import Recover from './Recover';
 
 // import Window from 'components/Window';
