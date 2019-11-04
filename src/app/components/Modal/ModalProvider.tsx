@@ -42,7 +42,6 @@ import AuthAccountCreated from './Auth/AuthAccountCreated';
 import TxConfirmModal from './Tx/ConfirmModal';
 import PageModal from './PageModal';
 import CopyWalletModal from './Auth/CopyWalletModal';
-import RegisterModal from './Auth/RegisterModal';
 import RolePickerModal from 'containers/Modal/RolePickerModal';
 import RemoveNetworkModal from './Network/RemoveNetworkModal';
 import NetworkErrorModal from './Auth/NetworkErrorModal';
@@ -72,7 +71,6 @@ const MODAL_COMPONENTS = {
     AUTH_ACCOUNT_REMOVE: AuthAccountRemove,
     AUTH_ACCOUNT_RESTORE: AuthAccountRestoreModal,
     AUTH_LOGIN: AuthLoginModal,
-    REGISTER_WALLET: RegisterModal,
     COPY_WALLET: CopyWalletModal,
     TX_CONFIRM: TxConfirmModal,
     TX_ERROR: TxErrorModal,
