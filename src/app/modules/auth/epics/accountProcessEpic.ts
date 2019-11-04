@@ -40,8 +40,7 @@ const accountProcessEpic: Epic = (action$, store) =>
         const form = new URLSearchParams();
         form.append('pub', keys.public);
         form.append('email', action.payload.email);
-        form.append('name', action.payload.firstName);
-        form.append('surname', action.payload.lastName);
+        form.append('name', action.payload.name);
 
         return Observable.from(
             fetch(network.activationUrl, {

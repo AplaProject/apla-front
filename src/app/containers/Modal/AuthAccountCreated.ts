@@ -13,42 +13,28 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import { connect } from 'react-redux';
-import { IWallet } from 'apla/auth';
-import { modalShow } from 'modules/modal/actions';
-import { loginAccount } from 'modules/auth/actions';
 import { IModalProps } from 'components/Modal';
+import { push } from 'connected-react-router';
 
-import AuthLoginModal from 'components/Modal/Auth/AuthLoginModal';
+import AuthAccountCreated from 'components/Modal/Auth/AuthAccountCreated';
 
 export default connect(
     null,
     {
-        modalShow,
-        loginAccount: loginAccount.started
+        redirect: () => push('/')
     },
     (
         _state,
         dispatch: any,
-        props: IModalProps<{ wallet: IWallet }, string>
+        props: IModalProps<{ name: string; account: string }, void>
     ) => ({
         ...props,
-        onResult: (password: string) => {
-            props.onResult(password);
-
-            if (password) {
-                dispatch.loginAccount({
-                    account: props.params.wallet,
-                    password
-                });
-            } else {
-                dispatch.modalShow({
-                    id: 'AUTH_ERROR',
-                    type: 'AUTH_ERROR',
-                    params: {
-                        error: 'E_INVALID_PASSWORD'
-                    }
-                });
-            }
+        onCancel: () => {
+            dispatch.redirect();
+        },
+        onResult: (params: void) => {
+            props.onResult(undefined);
+            dispatch.redirect();
         }
     })
-)(AuthLoginModal);
+)(AuthAccountCreated);

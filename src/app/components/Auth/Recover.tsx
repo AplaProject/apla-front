@@ -16,7 +16,12 @@ import React from 'react';
 import Authentication from 'containers/Auth/Authentication';
 
 const Recover: React.SFC = () => (
-    <Authentication title="Recover Account" onReturn={undefined} />
+    <Authentication
+        title="Recover Account"
+        onReturn={undefined}
+        onProcess={undefined}
+        onProcessExternal={undefined}
+    />
 );
 
 export default Recover;

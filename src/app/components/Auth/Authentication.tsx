@@ -22,6 +22,12 @@ import Button from 'components/Form/Button';
 interface Props {
     title: string;
     onReturn: () => void;
+    onProcess: (params: {
+        password: string;
+        email: string;
+        name: string;
+    }) => void;
+    onProcessExternal: (password: string) => void;
 }
 
 interface State {
@@ -90,8 +96,15 @@ class Authentication extends React.Component<Props, State> {
     };
 
     handleSubmit = (params: { [key: string]: any }) => {
-        // tslint:disable-next-line
-        console.log(params);
+        if (this.state.useExternal) {
+            this.props.onProcessExternal(this.state.password);
+        } else {
+            this.props.onProcess({
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password
+            });
+        }
     };
 
     render() {

@@ -38,7 +38,7 @@ import AuthChangePasswordModal from 'components/Modal/Auth/AuthChangePasswordMod
 import AuthPasswordChangedModal from 'components/Modal/Auth/AuthPasswordChangedModal';
 import AuthCreateAccountModal from 'containers/Modal/CreateAccountModal';
 import AuthSecurityNoticeModal from 'containers/Modal/SecurityNoticeModal';
-import AuthAccountCreated from './Auth/AuthAccountCreated';
+import AuthAccountCreated from 'containers/Modal/AuthAccountCreated';
 import TxConfirmModal from './Tx/ConfirmModal';
 import PageModal from './PageModal';
 import CopyWalletModal from './Auth/CopyWalletModal';
@@ -54,7 +54,6 @@ import BackupModal from 'containers/Modal/BackupModal';
 import AuthSecurityProcessModal from 'containers/Modal/SecurityProcessModal';
 import AuthAccountRemove from 'containers/Modal/AccountRemoveModal';
 import AuthAccountRestoreModal from 'containers/Modal/AuthAccountRestoreModal';
-import AuthLoginModal from 'containers/Modal/AuthLoginModal';
 import SignPdfModal from 'containers/Modal/SignPdfModal';
 import AccountProcessModal from 'containers/Modal/AccountProcessModal';
 
@@ -70,7 +69,6 @@ const MODAL_COMPONENTS = {
     AUTH_ACCOUNT_CREATED: AuthAccountCreated,
     AUTH_ACCOUNT_REMOVE: AuthAccountRemove,
     AUTH_ACCOUNT_RESTORE: AuthAccountRestoreModal,
-    AUTH_LOGIN: AuthLoginModal,
     COPY_WALLET: CopyWalletModal,
     TX_CONFIRM: TxConfirmModal,
     TX_ERROR: TxErrorModal,

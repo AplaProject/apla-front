@@ -15,13 +15,16 @@
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { push } from 'connected-react-router';
+import { accountProcess, securityProcess } from 'modules/auth/actions';
 
 import Authentication from 'components/Auth/Authentication';
 
 const mapStateToProps = (state: IRootState) => ({});
 
 const mapDispatchToProps = {
-    onReturn: () => push('/')
+    onReturn: () => push('/'),
+    onProcess: accountProcess,
+    onProcessExternal: securityProcess
 };
 
 export default connect(

@@ -21,7 +21,8 @@ import { push } from 'connected-react-router';
 
 const loginAccountEpic: Epic = (action$, store, { api }) => action$.ofAction(loginAccount.started)
     .flatMap(action => {
-        const privateKey = keyring.decryptAES(action.payload.account.encKey, action.payload.password);
+        const account = store.getState().storage.wallets[0];
+        const privateKey = keyring.decryptAES(account.encKey, action.payload);
         const state = store.getState();
         const networkEndpoint = state.engine.guestSession.network;
 
@@ -36,7 +37,7 @@ const loginAccountEpic: Epic = (action$, store, { api }) => action$.ofAction(log
         const client = api({ apiHost: networkEndpoint.apiHost });
         const ecosystem = '1';
 
-        return Observable.from(client.keyinfo({ id: action.payload.account.id })).flatMap(keyInfo => {
+        return Observable.from(client.keyinfo({ id: account.id })).flatMap(keyInfo => {
             const firstEcosystem = (keyInfo.ecosystems || []).find(e => ecosystem === e.ecosystem);
             if (!firstEcosystem) {
                 return Observable.of(loginAccount.failed({
@@ -75,7 +76,7 @@ const loginAccountEpic: Epic = (action$, store, { api }) => action$.ofAction(log
                                 publicKey,
                                 context: {
                                     wallet: {
-                                        ...action.payload.account,
+                                        ...account,
                                         address: keyInfo.account,
                                         access: keyInfo.ecosystems,
                                     },

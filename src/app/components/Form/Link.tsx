@@ -12,16 +12,14 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import React from 'react';
-import Authentication from 'containers/Auth/Authentication';
+import { Link } from 'react-router-dom';
+import themed from 'components/Theme/themed';
 
-const SignUp: React.SFC = () => (
-    <Authentication
-        title="Create Account"
-        onReturn={undefined}
-        onProcess={undefined}
-        onProcessExternal={undefined}
-    />
-);
+export default themed(Link)`
+    color: #7e6744;
+    font-size: 14px;
 
-export default SignUp;
+    &:hover {
+        color: #a9926f;
+    }
+`;

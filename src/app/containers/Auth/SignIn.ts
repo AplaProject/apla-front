@@ -12,16 +12,25 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import React from 'react';
-import Authentication from 'containers/Auth/Authentication';
+import { connect } from 'react-redux';
+import { IRootState } from 'modules';
+import { loginAccount } from 'modules/auth/actions';
 
-const SignUp: React.SFC = () => (
-    <Authentication
-        title="Create Account"
-        onReturn={undefined}
-        onProcess={undefined}
-        onProcessExternal={undefined}
-    />
-);
+import SignIn from 'components/Auth/SignIn';
 
-export default SignUp;
+const mapStateToProps = (state: IRootState) => ({
+    isValidated: Boolean(
+        state.auth.wallets &&
+            state.auth.wallets.length &&
+            state.auth.wallets[0].address
+    )
+});
+
+const mapDispatchToProps = {
+    onLogin: loginAccount.started
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SignIn);
