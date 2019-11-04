@@ -1,0 +1,60 @@
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+import React from 'react';
+import themed from 'components/Theme/themed';
+import Logo from 'components/Logo';
+import media from 'components/Theme/media';
+
+interface Props {
+    className?: string;
+}
+
+const Brand: React.SFC<Props> = props => (
+    <div className={props.className}>
+        <div className="brand__logo">
+            <Logo />
+        </div>
+        <div className="brand__content">{props.children}</div>
+    </div>
+);
+
+export default themed(Brand)`
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: .5fr .5fr;
+    grid-template-areas: 'logo content';
+    grid-column-gap: 50px;
+    align-items: center;
+    padding: 50px;
+    height: 100vh;
+
+    & .brand__logo {
+        grid-area: logo;
+    }
+
+    & .brand__content {
+        grid-area: content;
+    }
+
+    @media (${media.md}) {
+        grid-template-columns: 0 1fr;
+        grid-column-gap: 0;
+        padding: 0;
+
+        & .brand__logo {
+            display: none;
+        }
+    }
+`;

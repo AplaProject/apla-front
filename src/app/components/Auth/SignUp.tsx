@@ -14,16 +14,6 @@
 
 import React from 'react';
 
-const Splash: React.SFC = () => (
-    <div className="preloader">
-        <div className="preloader__overlay">
-            <div className="preloader__logo" />
-            <div className="preloader__brand" />
-            <div className="preloader__version">
-                {process.env.REACT_APP_VERSION}
-            </div>
-        </div>
-    </div>
-);
+const SignUp: React.SFC = props => <div>Sign UP</div>;
 
-export default Splash;
+export default SignUp;

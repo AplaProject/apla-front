@@ -13,12 +13,17 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import React from 'react';
-
-import Window from 'components/Window';
+import { Route, Switch } from 'react-router';
+import Brand from 'components/Layout/Brand';
+import Welcome from './Welcome';
 import AccountList from 'containers/AccountList';
-import Button from 'components/Button/Button';
-import HeaderSeparator from 'components/Header/HeaderSeparator';
-import Header from 'components/Header';
+import SignUp from './SignUp';
+import Recover from './Recover';
+
+// import Window from 'components/Window';
+// import Button from 'components/Button/Button';
+// import HeaderSeparator from 'components/Header/HeaderSeparator';
+// import Header from 'components/Header';
 
 interface Props {
     className?: string;
@@ -30,43 +35,57 @@ interface Props {
 }
 
 const Auth: React.SFC<Props> = props => (
-    <Window
-        className={props.className}
-        type="brand"
-        header={
-            <Header vertical>
-                <HeaderSeparator />
-            </Header>
-        }
-        footer={
-            <div>
-                <Button
-                    className="btn btn-primary btn-block"
-                    onClick={props.onCreate}
-                >
-                    Create or Recover Account
-                </Button>
-                <div
-                    style={{
-                        textAlign: 'center',
-                        marginTop: 10,
-                        marginBottom: 10
-                    }}
-                >
-                    Powered by&nbsp;
-                    <a
-                        href="https://apla.io"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Apla
-                    </a>
-                </div>
-            </div>
-        }
-    >
-        <AccountList />
-    </Window>
+    <Brand>
+        <Switch>
+            {props.isEmpty ? (
+                <Route path="/" exact component={Welcome} />
+            ) : null}
+
+            {props.isEmpty ? (
+                <Route path="/" exact component={AccountList} />
+            ) : null}
+
+            <Route path="/signup" component={SignUp} />
+            <Route path="/recover" component={Recover} />
+        </Switch>
+    </Brand>
+    // <Window
+    //     className={props.className}
+    //     type="brand"
+    //     header={
+    //         <Header vertical>
+    //             <HeaderSeparator />
+    //         </Header>
+    //     }
+    //     footer={
+    //         <div>
+    //             <Button
+    //                 className="btn btn-primary btn-block"
+    //                 onClick={props.onCreate}
+    //             >
+    //                 Create or Recover Account
+    //             </Button>
+    //             <div
+    //                 style={{
+    //                     textAlign: 'center',
+    //                     marginTop: 10,
+    //                     marginBottom: 10
+    //                 }}
+    //             >
+    //                 Powered by&nbsp;
+    //                 <a
+    //                     href="https://apla.io"
+    //                     target="_blank"
+    //                     rel="noopener noreferrer"
+    //                 >
+    //                     Apla
+    //                 </a>
+    //             </div>
+    //         </div>
+    //     }
+    // >
+    //     <AccountList />
+    // </Window>
 );
 
 export default Auth;

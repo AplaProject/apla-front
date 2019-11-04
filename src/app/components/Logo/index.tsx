@@ -13,17 +13,33 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import React from 'react';
+import themed from 'components/Theme/themed';
 
-const Splash: React.SFC = () => (
-    <div className="preloader">
-        <div className="preloader__overlay">
-            <div className="preloader__logo" />
-            <div className="preloader__brand" />
-            <div className="preloader__version">
-                {process.env.REACT_APP_VERSION}
-            </div>
-        </div>
+interface Props {
+    className?: string;
+}
+
+const Logo: React.SFC<Props> = props => (
+    <div className={props.className}>
+        <img src="/icons/icon.svg" className="logo__main" />
+        <div className="logo__brand" />
     </div>
 );
 
-export default Splash;
+export default themed(Logo)`
+    position: relative;
+
+    .logo__main {
+        opacity: 0.03;
+    }
+
+    .logo__brand {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: url(/img/logoText.svg) center no-repeat;
+        background-size: 50%;
+    }
+`;

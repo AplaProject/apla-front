@@ -15,6 +15,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import themed from 'components/Theme/themed';
+import { Link } from 'react-router-dom';
 
 interface Props {
     className?: string;
@@ -22,24 +23,62 @@ interface Props {
 
 const Welcome: React.SFC<Props> = props => (
     <div className={props.className}>
-        <h4 className="p0 m0">
-            <FormattedMessage id="auth.welcome" defaultMessage="Welcome" />
-        </h4>
-        <p className="pv">
-            <FormattedMessage
-                id="auth.welcome.guide"
-                defaultMessage="Before proceeding, you will be guided through the account creation process. This will not take too much time"
-            />
-        </p>
+        <div className="welcome__block">
+            <h3 className="welcome__heading">
+                <FormattedMessage id="auth.welcome" defaultMessage="Welcome" />
+            </h3>
+        </div>
+
+        <div className="welcome__block">
+            <Link to="/signup" className="welcome__signup">
+                Sign up
+            </Link>
+        </div>
+
+        <div className="welcome__block">
+            <Link to="/recover" className="welcome__recover">
+                Recover access
+            </Link>
+        </div>
     </div>
 );
 
 export default themed(Welcome)`
-    height: 100%;
     text-align: center;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+    & .welcome__block {
+        margin: 26px;
+    }
+    
+    & .welcome__heading {
+        color: #fff;
+        font-weight: 500;
+    }
+
+    & .welcome__signup {
+        background: #d8d1c7;
+        border: 0;
+        text-transform: uppercase;
+        color: #7a623e;
+        border-radius: 31px;
+        padding: 10px;
+        min-width: 260px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    & .welcome__recover {
+        padding: 10px;
+        border: 0;
+        background: 0;
+        font-size: 16px;
+        color: #fff;
+        text-transform: uppercase;
+        min-width: 260px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
 `;

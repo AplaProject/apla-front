@@ -1,128 +1,201 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Apla">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover" />
-    <meta name="theme-color" content="#3873a6">
-    <link rel="apple-touch-icon" href="/icons/icon_512.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon_152.png" />
-    <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon_167.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon_180.png" />
-    <link href="/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <style type="text/css">
-        body {
-            background: #38393a;
-        }
-
-        .preloader {
-            font-size: 0;
-            background: linear-gradient(#4C4D4E, #252627);
-            /* background: url(/icons/icon.svg) center center no-repeat; */
-            background-size: auto;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            width: 100%;
-            height: 100%;
-            display: table;
-        }
-
-        .preloader__overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url(/img/back.png) repeat;
-        }
-
-        .preloader__logo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url(/icons/icon.svg) center center no-repeat;
-            background-size: auto;
-            opacity: 0.03;
-            z-index: 0;
-        }
-
-        .preloader__brand {
-            background: url(/img/logoText.svg) center center no-repeat;
-            background-size: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-        }
-
-        .preloader__version {
-            position: absolute;
-            bottom: 10px;
-            left: 15px;
-            color: #fff;
-            opacity: 0.5;
-            font-size: 16px;
-            font-weight: bold;
-        }
-    </style>
-    <script type="text/javascript">
-        // Single Page Apps for GitHub Pages
-        // https://github.com/rafrex/spa-github-pages
-        // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-        // ----------------------------------------------------------------------
-        // This script checks to see if a redirect is present in the query string
-        // and converts it back into the correct url and adds it to the
-        // browser's history using window.history.replaceState(...),
-        // which won't cause the browser to attempt to load the new url.
-        // When the single page app is loaded further down in this file,
-        // the correct url will be waiting in the browser's history for
-        // the single page app to route accordingly.
-        (function (l) {
-            if (l.search) {
-                var q = {};
-                l.search.slice(1).split('&').forEach(function (v) {
-                    var a = v.split('=');
-                    q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-                });
-                if (q.p !== undefined) {
-                    window.history.replaceState(null, null,
-                        l.pathname.slice(0, -1) + (q.p || '') +
-                        (q.q ? ('?' + q.q) : '') +
-                        l.hash
-                    );
-                }
+    <head>
+        <meta charset="utf-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-title" content="Apla" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover"
+        />
+        <meta name="theme-color" content="#3873a6" />
+        <link rel="apple-touch-icon" href="/icons/icon_512.png" />
+        <link
+            rel="apple-touch-icon"
+            sizes="152x152"
+            href="/icons/icon_152.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="167x167"
+            href="/icons/icon_167.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/icons/icon_180.png"
+        />
+        <link
+            href="/splashscreens/iphone5_splash.png"
+            media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/iphone6_splash.png"
+            media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/iphoneplus_splash.png"
+            media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/iphonex_splash.png"
+            media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/iphonexr_splash.png"
+            media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/iphonexsmax_splash.png"
+            media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/ipad_splash.png"
+            media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/ipadpro1_splash.png"
+            media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/ipadpro3_splash.png"
+            media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+        />
+        <link
+            href="/splashscreens/ipadpro2_splash.png"
+            media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+        />
+        <style type="text/css">
+            body {
+                background: #38393a;
             }
-        }(window.location))
-    </script>
-    <!--
+
+            #root {
+                z-index: 1;
+                position: relative;
+            }
+
+            .preloader {
+                z-index: 0;
+                font-size: 0;
+                background: linear-gradient(#4c4d4e, #252627);
+                background-size: auto;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: table;
+            }
+
+            .preloader__overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url(/img/back.png) repeat;
+            }
+
+            .preloader__logo {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url(/icons/icon.svg) center center no-repeat;
+                background-size: auto;
+                opacity: 0.03;
+                z-index: 0;
+            }
+
+            .preloader__brand {
+                background: url(/img/logoText.svg) center center no-repeat;
+                background-size: 50%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+            }
+
+            .preloader__version {
+                position: absolute;
+                bottom: 10px;
+                left: 15px;
+                color: #fff;
+                opacity: 0.5;
+                font-size: 16px;
+                font-weight: bold;
+            }
+        </style>
+        <script type="text/javascript">
+            // Single Page Apps for GitHub Pages
+            // https://github.com/rafrex/spa-github-pages
+            // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+            // ----------------------------------------------------------------------
+            // This script checks to see if a redirect is present in the query string
+            // and converts it back into the correct url and adds it to the
+            // browser's history using window.history.replaceState(...),
+            // which won't cause the browser to attempt to load the new url.
+            // When the single page app is loaded further down in this file,
+            // the correct url will be waiting in the browser's history for
+            // the single page app to route accordingly.
+            (function(l) {
+                if (l.search) {
+                    var q = {};
+                    l.search
+                        .slice(1)
+                        .split('&')
+                        .forEach(function(v) {
+                            var a = v.split('=');
+                            q[a[0]] = a
+                                .slice(1)
+                                .join('=')
+                                .replace(/~and~/g, '&');
+                        });
+                    if (q.p !== undefined) {
+                        window.history.replaceState(
+                            null,
+                            null,
+                            l.pathname.slice(0, -1) +
+                                (q.p || '') +
+                                (q.q ? '?' + q.q : '') +
+                                l.hash
+                        );
+                    }
+                }
+            })(window.location);
+        </script>
+        <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/icon_512.png">
-    <link rel="stylesheet" href="%PUBLIC_URL%/styles/fonts.css">
-    <link rel="stylesheet" href="%PUBLIC_URL%/styles/pe-helper.min.css">
-    <link rel="stylesheet" href="%PUBLIC_URL%/styles/iconfont.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
-    <!--
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link rel="shortcut icon" href="%PUBLIC_URL%/icon_512.png" />
+        <link rel="stylesheet" href="%PUBLIC_URL%/styles/fonts.css" />
+        <link rel="stylesheet" href="%PUBLIC_URL%/styles/pe-helper.min.css" />
+        <link rel="stylesheet" href="%PUBLIC_URL%/styles/iconfont.css" />
+        <link
+            rel="stylesheet"
+            href="https://js.arcgis.com/4.8/esri/css/main.css"
+        />
+        <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -131,21 +204,23 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Apla</title>
-</head>
+        <title>Apla</title>
+    </head>
 
-<body>
-    <noscript>
-        You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root">
-        <div className="preloader">
-            <div className="preloader__overlay">
-                <div className="preloader__logo" />
-                <div className="preloader__brand" />
+    <body>
+        <noscript>
+            You need to enable JavaScript to run this app.
+        </noscript>
+        <div class="preloader">
+            <div class="preloader__overlay"></div>
+        </div>
+        <div id="root">
+            <div class="preloader">
+                <div class="preloader__overlay">
+                    <div class="preloader__logo"></div>
+                    <div class="preloader__brand"></div>
+                </div>
             </div>
-        </div> 
-    </div>
-</body>
-
+        </div>
+    </body>
 </html>
