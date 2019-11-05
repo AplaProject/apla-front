@@ -57,7 +57,7 @@ const SignIn: React.SFC<Props> = props => (
                             <Link to="/recover">Forgot your password</Link>
                         </div>
                     </Validation.components.ValidatedFormGroup>
-                    <Button type="submit" className="block">
+                    <Button block type="submit">
                         SIGN IN
                     </Button>
                 </Validation.components.ValidatedForm>
@@ -72,7 +72,7 @@ const SignIn: React.SFC<Props> = props => (
                     </div>
                     <br />
                     <div>
-                        You will receive a email with further instructions
+                        You will receive an email with further instructions
                     </div>
                     <br />
                     <div>

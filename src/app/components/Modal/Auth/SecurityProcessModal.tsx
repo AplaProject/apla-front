@@ -16,7 +16,7 @@ import React from 'react';
 
 import { ModalContainer, IModalProps } from '../';
 import ModalWindow from 'containers/Modal/ModalWindow';
-import Button from 'components/Button/Button';
+import Button from 'components/Form/Button';
 
 interface Params {
     keys: {
@@ -83,20 +83,17 @@ class SecurityProcessModal extends ModalContainer<
                 this.props.onResult(null);
             }
         }
-    }
+    };
 
     render() {
         return (
             <ModalWindow
                 title="Create or Recover Account"
                 width={400}
-                icon="Key"
                 controls={
-                    <div>
-                        <Button type="link" onClick={this.props.onCancel}>
-                            Cancel
-                        </Button>
-                    </div>
+                    <Button color="link" block onClick={this.props.onCancel}>
+                        Cancel
+                    </Button>
                 }
             >
                 {this.state.result === false && (

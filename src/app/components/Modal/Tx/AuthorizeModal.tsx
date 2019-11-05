@@ -18,7 +18,7 @@ import { FormattedMessage } from 'react-intl';
 import Modal from '../';
 import Validation from 'components/Validation';
 import ModalWindow from 'containers/Modal/ModalWindow';
-import Button from 'components/Button/Button';
+import Button from 'components/Form/Button';
 import ValidatedForm from 'components/Validation/ValidatedForm';
 
 class AuthorizeModal extends Modal<void, string> {
@@ -31,7 +31,7 @@ class AuthorizeModal extends Modal<void, string> {
         if (form.valid) {
             this.props.onResult(form.payload.password.value);
         }
-    }
+    };
 
     render() {
         return (
@@ -44,13 +44,17 @@ class AuthorizeModal extends Modal<void, string> {
                 }
                 controls={
                     <>
-                        <Button type="link" onClick={this.props.onCancel}>
+                        <Button
+                            block
+                            color="link"
+                            onClick={this.props.onCancel}
+                        >
                             <FormattedMessage
                                 id="cancel"
                                 defaultMessage="Cancel"
                             />
                         </Button>
-                        <Button onClick={this.handleSubmit}>
+                        <Button block onClick={this.handleSubmit}>
                             <FormattedMessage
                                 id="confirm"
                                 defaultMessage="Confirm"

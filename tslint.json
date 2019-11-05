@@ -89,6 +89,7 @@
             "check-separator",
             "check-type",
             "check-typecast"
-        ]
+        ],
+        "jsx-curly-spacing": false
     }
 }

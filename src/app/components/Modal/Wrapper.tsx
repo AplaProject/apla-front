@@ -72,7 +72,7 @@ const childAnimationDef = {
 };
 
 const StyledModalWrapper = themed.div`
-    background: rgba(97, 134, 179, 0.5);
+    background: rgba(103, 100, 95, 0.3);
     position: fixed;
     top: 0;
     left: 0;
@@ -100,7 +100,8 @@ const StyledModalWrapper = themed.div`
         text-align: initial;
         max-width: 95%;
         overflow: hidden;
-        box-shadow: rgba(0,0,0,0.2) 0 0 20px;
+        box-shadow: rgba(0,0,0,0.1) 0 0 20px;
+        border-radius: 12px;
     }
 
     > .styled {

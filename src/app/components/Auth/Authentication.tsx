@@ -233,11 +233,7 @@ class Authentication extends React.Component<Props, State> {
                         </Validation.components.ValidatedFormGroup>
                     </div>
 
-                    <Button
-                        disabled={!this.isFilled()}
-                        type="submit"
-                        className="block"
-                    >
+                    <Button disabled={!this.isFilled()} type="submit" block>
                         Continue
                     </Button>
                 </Validation.components.ValidatedForm>

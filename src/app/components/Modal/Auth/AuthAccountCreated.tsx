@@ -16,7 +16,7 @@ import React from 'react';
 
 import Modal from '../';
 import ModalWindow from 'containers/Modal/ModalWindow';
-import Button from 'components/Button/Button';
+import Button from 'components/Form/Button';
 import Card from 'components/Card';
 
 interface Params {
@@ -33,11 +33,9 @@ class AuthAccountCreated extends Modal<Params, void> {
                 title="Congratulations!"
                 width={400}
                 controls={
-                    <div>
-                        <Button onClick={() => this.props.onResult(null)}>
-                            Finish
-                        </Button>
-                    </div>
+                    <Button block onClick={() => this.props.onResult(null)}>
+                        Finish
+                    </Button>
                 }
             >
                 <div>Your account has been successfully created</div>

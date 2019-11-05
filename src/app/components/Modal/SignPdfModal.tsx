@@ -77,7 +77,7 @@ class SignPdfModal extends ModalContainer<IModalProps<Params, void>, State> {
                 this.props.onResult(null);
             }
         }
-    }
+    };
 
     render() {
         return true ? (
@@ -110,7 +110,6 @@ class SignPdfModal extends ModalContainer<IModalProps<Params, void>, State> {
             <ModalWindow
                 title="Document signing"
                 width={400}
-                icon="Key"
                 controls={
                     <div>
                         <Button type="link" onClick={this.props.onCancel}>

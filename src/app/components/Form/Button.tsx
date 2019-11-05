@@ -12,15 +12,41 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+import React from 'react';
 import themed from 'components/Theme/themed';
+import classNames from 'classnames';
 
-export default themed.button`
+type Theme = 'primary' | 'link';
+
+interface Props extends React.HTMLProps<HTMLButtonElement> {
+    block?: boolean;
+    color?: Theme;
+}
+
+const Button: React.SFC<Props> = props => {
+    const { color, block, ...buttonProps } = props;
+    const className = classNames(
+        props.className,
+        `button_theme-${color || 'primary'}`,
+        {
+            button_block: block
+        }
+    );
+
+    return (
+        <button {...buttonProps} className={className}>
+            {props.children}
+        </button>
+    );
+};
+
+export default themed(Button)`
     background: #d8d1c7;
     border: 0;
     text-transform: uppercase;
     color: #7a623e;
     border-radius: 31px;
-    padding: 10px;
+    padding: 10px 20px;
     font-size: 16px;
     text-align: center;
     text-decoration: none;
@@ -37,8 +63,19 @@ export default themed.button`
         color: #c5bcad;
     }
 
-    &.block {
+    &.button_block {
         box-sizing: border-box;
         width: 100%;        
+    }
+
+    &.button_theme-link {
+        background: 0;
+
+        color: #7e6744;
+        font-size: 14px;
+
+        &:hover {
+            color: #a9926f;
+        }
     }
 `;

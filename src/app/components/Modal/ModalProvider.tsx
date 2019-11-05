@@ -36,7 +36,6 @@ import AuthErrorModal from 'components/Modal/Auth/AuthErrorModal';
 import AuthRemoveWalletModal from 'components/Modal/Auth/AuthRemoveWalletModal';
 import AuthChangePasswordModal from 'components/Modal/Auth/AuthChangePasswordModal';
 import AuthPasswordChangedModal from 'components/Modal/Auth/AuthPasswordChangedModal';
-import AuthCreateAccountModal from 'containers/Modal/CreateAccountModal';
 import AuthSecurityNoticeModal from 'containers/Modal/SecurityNoticeModal';
 import AuthAccountCreated from 'containers/Modal/AuthAccountCreated';
 import TxConfirmModal from './Tx/ConfirmModal';
@@ -53,9 +52,7 @@ import ChangeLocaleModal from 'containers/Modal/ChangeLocaleModal';
 import BackupModal from 'containers/Modal/BackupModal';
 import AuthSecurityProcessModal from 'containers/Modal/SecurityProcessModal';
 import AuthAccountRemove from 'containers/Modal/AccountRemoveModal';
-import AuthAccountRestoreModal from 'containers/Modal/AuthAccountRestoreModal';
 import SignPdfModal from 'containers/Modal/SignPdfModal';
-import AccountProcessModal from 'containers/Modal/AccountProcessModal';
 
 const MODAL_COMPONENTS = {
     AUTHORIZE: AuthorizeModal,
@@ -63,12 +60,10 @@ const MODAL_COMPONENTS = {
     AUTH_REMOVE_WALLET: AuthRemoveWalletModal,
     AUTH_CHANGE_PASSWORD: AuthChangePasswordModal,
     AUTH_PASSWORD_CHANGED: AuthPasswordChangedModal,
-    AUTH_CREATE_ACCOUNT: AuthCreateAccountModal,
     AUTH_SECURITY_NOTICE: AuthSecurityNoticeModal,
     AUTH_SECURITY_PROCESS: AuthSecurityProcessModal,
     AUTH_ACCOUNT_CREATED: AuthAccountCreated,
     AUTH_ACCOUNT_REMOVE: AuthAccountRemove,
-    AUTH_ACCOUNT_RESTORE: AuthAccountRestoreModal,
     COPY_WALLET: CopyWalletModal,
     TX_CONFIRM: TxConfirmModal,
     TX_ERROR: TxErrorModal,
@@ -93,8 +88,7 @@ const MODAL_COMPONENTS = {
     EDITOR_CLOSE_ALL: EditorCloseAllModal,
     CHANGE_LOCALE: ChangeLocaleModal,
     BACKUP: BackupModal,
-    SIGN_PDF: SignPdfModal,
-    ACCOUNT_PROCESS: AccountProcessModal
+    SIGN_PDF: SignPdfModal
 };
 
 export interface IModalProviderProps {

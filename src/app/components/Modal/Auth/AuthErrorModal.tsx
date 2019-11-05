@@ -13,11 +13,11 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import Modal from '../';
 import ModalWindow from 'containers/Modal/ModalWindow';
+import Button from 'components/Form/Button';
 
 export interface IAuthErrorModalProps {
     error: string;
@@ -35,11 +35,7 @@ class AuthErrorModal extends Modal<IAuthErrorModalProps, void> {
                 }
                 width={300}
                 controls={
-                    <Button
-                        type="button"
-                        bsStyle="primary"
-                        onClick={this.props.onCancel}
-                    >
+                    <Button type="button" block onClick={this.props.onCancel}>
                         <FormattedMessage id="close" defaultMessage="Close" />
                     </Button>
                 }

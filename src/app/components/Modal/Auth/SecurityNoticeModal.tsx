@@ -30,7 +30,6 @@ class SecurityNoticeModal extends Modal<Params, boolean> {
             <ModalWindow
                 title="Create or Recover Account"
                 width={400}
-                icon="Key"
                 controls={
                     <div>
                         <Button type="link" onClick={this.props.onCancel}>

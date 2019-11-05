@@ -14,83 +14,45 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
-import * as Icons from 'react-feather';
-import classNames from 'classnames';
 import media from 'components/Theme/media';
+import { X } from 'react-feather';
 
 interface Props {
     className?: string;
-    icon?: keyof typeof Icons;
     title: React.ReactNode;
     controls?: React.ReactNode;
     width?: number;
     onClose: () => void;
 }
 
-const ModalWindow: React.SFC<Props> = props => {
-    const Icon = Icons[props.icon];
-
-    return (
-        <div className={props.className}>
-            {Icon && (
-                <aside className="modalWindow__aside">
-                    <Icon size={55} />
-                </aside>
+const ModalWindow: React.SFC<Props> = props => (
+    <div className={props.className}>
+        <section
+            className="modalWindow__content"
+            style={{ maxWidth: props.width }}
+        >
+            <h3 className="modalWindow__title">
+                <div>{props.title}</div>
+                <button className="modalWindow__close" onClick={props.onClose}>
+                    <X size={15} />
+                </button>
+            </h3>
+            {props.children}
+            {props.controls && (
+                <div className="modalWindow__controls">{props.controls}</div>
             )}
-            <section
-                className={classNames('modalWindow__content', {
-                    modalWindow_side: !!Icon
-                })}
-                style={{ maxWidth: props.width }}
-            >
-                <h3 className="modalWindow__title">
-                    <div>{props.title}</div>
-                    <button
-                        className="modalWindow__close"
-                        onClick={props.onClose}
-                    >
-                        <Icons.X size={20} />
-                    </button>
-                </h3>
-                {props.children}
-                {props.controls && (
-                    <div className="modalWindow__controls">
-                        {props.controls}
-                    </div>
-                )}
-            </section>
-        </div>
-    );
-};
+        </section>
+    </div>
+);
 
 export default themed(ModalWindow)`
     display: flex;
     flex-direction: row;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     background: #fff;
     text-align: left;
     max-width: 50vw;
-
-    &.modalWindow_side {
-        .modalWindow__content {
-            padding: 20px 20px 20px 30px;
-        }
-    }
-
-    .modalWindow__aside {
-        grid-template: 'aside';
-        background: #446C8F;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 140px;
-        min-width: 140px;
-
-        > svg {
-            stroke: #A2B6C7;
-        }
-    }
 
     .modalWindow__content {
         grid-template: 'content';
@@ -103,17 +65,18 @@ export default themed(ModalWindow)`
 
     .modalWindow__title {
         font-size: 20px;
-        position: relative;
-        color: #000;
+        color: #4c4c4c;
         font-weight: 500;
         margin: 0;
-        padding: 0 20px 10px 0;
+        padding: 5px 20px 15px;
+        text-align: center;
+        min-width: 200px;
     }
 
     .modalWindow__close {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 15px;
+        right: 15px;
         background: 0;
         outline: 0;
         border: 0;
@@ -135,8 +98,12 @@ export default themed(ModalWindow)`
     }
 
     .modalWindow__controls {
-        margin-top: 20px;
-        float: right;
+        border-top: solid 1px #e6e6e6;
+        margin: 20px -20px 0 -20px;
+        padding: 15px 20px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
     }
 
     @media (${media.lg}) {
