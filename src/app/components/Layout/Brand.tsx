@@ -38,7 +38,7 @@ export default themed(Brand)`
     grid-column-gap: 50px;
     align-items: center;
     padding: 50px;
-    height: 100vh;
+    height: ${media.standalone ? '100vh' : 'calc(var(--vh, 1vh) * 100)'};
 
     & .brand__logo {
         grid-area: logo;
