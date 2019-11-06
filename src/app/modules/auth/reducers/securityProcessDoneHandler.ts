@@ -12,22 +12,19 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import { connect } from 'react-redux';
-import { IRootState } from 'modules';
-import { push } from 'connected-react-router';
-import { accountProcess, securityProcess } from 'modules/auth/actions';
+import { State } from '../reducer';
+import { securityProcess } from '../actions';
+import { Reducer } from 'modules';
 
-import Authentication from 'components/Auth/Authentication';
+const securityProcessDoneHandler: Reducer<
+    typeof securityProcess.done,
+    State
+> = (state, payload) => ({
+    ...state,
+    newAccount: {
+        ...payload.result,
+        password: payload.params
+    }
+});
 
-const mapStateToProps = (state: IRootState) => ({});
-
-const mapDispatchToProps = {
-    onReturn: () => push('/'),
-    onProcess: accountProcess,
-    onProcessExternal: securityProcess.started
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Authentication);
+export default securityProcessDoneHandler;

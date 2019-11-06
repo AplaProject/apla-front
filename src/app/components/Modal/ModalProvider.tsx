@@ -36,7 +36,6 @@ import AuthErrorModal from 'components/Modal/Auth/AuthErrorModal';
 import AuthRemoveWalletModal from 'components/Modal/Auth/AuthRemoveWalletModal';
 import AuthChangePasswordModal from 'components/Modal/Auth/AuthChangePasswordModal';
 import AuthPasswordChangedModal from 'components/Modal/Auth/AuthPasswordChangedModal';
-import AuthSecurityNoticeModal from 'containers/Modal/SecurityNoticeModal';
 import AuthAccountCreated from 'containers/Modal/AuthAccountCreated';
 import TxConfirmModal from './Tx/ConfirmModal';
 import PageModal from './PageModal';
@@ -60,7 +59,6 @@ const MODAL_COMPONENTS = {
     AUTH_REMOVE_WALLET: AuthRemoveWalletModal,
     AUTH_CHANGE_PASSWORD: AuthChangePasswordModal,
     AUTH_PASSWORD_CHANGED: AuthPasswordChangedModal,
-    AUTH_SECURITY_NOTICE: AuthSecurityNoticeModal,
     AUTH_SECURITY_PROCESS: AuthSecurityProcessModal,
     AUTH_ACCOUNT_CREATED: AuthAccountCreated,
     AUTH_ACCOUNT_REMOVE: AuthAccountRemove,

@@ -37,6 +37,8 @@ import loginGuestFailedHandler from './reducers/loginGuestFailedHandler';
 import acquireSessionHandler from './reducers/acquireSessionHandler';
 import acquireSessionDoneHandler from './reducers/acquireSessionDoneHandler';
 import loginAccountDoneHandler from './reducers/loginAccountDoneHandler';
+import securityProcessHandler from './reducers/securityProcessHandler';
+import securityProcessDoneHandler from './reducers/securityProcessDoneHandler';
 
 export type State = {
     readonly isAcquired: boolean;
@@ -53,6 +55,12 @@ export type State = {
     readonly wallet: IAccountContext;
     readonly wallets: IAccount[];
     readonly privateKey: string;
+    readonly newAccount?: {
+        SAMLRequest: string;
+        RelayState: string;
+        privateKey: string;
+        password: string;
+    };
 };
 
 export const initialState: State = {
@@ -93,4 +101,6 @@ export default reducerWithInitialState<State>(initialState)
     .case(actions.loadWallet, loadWalletHandler)
     .case(actions.acquireSession.started, acquireSessionHandler)
     .case(actions.acquireSession.done, acquireSessionDoneHandler)
-    .case(actions.loginAccount.done, loginAccountDoneHandler);
+    .case(actions.loginAccount.done, loginAccountDoneHandler)
+    .case(actions.securityProcess.started, securityProcessHandler)
+    .case(actions.securityProcess.done, securityProcessDoneHandler);

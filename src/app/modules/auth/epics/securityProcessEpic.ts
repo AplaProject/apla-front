@@ -16,26 +16,26 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { securityProcess } from '../actions';
 import keyring from 'lib/keyring';
-import { modalShow } from 'modules/modal/actions';
 
 const securityProcessEpic: Epic = action$ =>
-    action$.ofAction(securityProcess).flatMap(action => {
+    action$.ofAction(securityProcess.started).flatMap(action => {
         const seed = keyring.generateSeed();
         const keys = keyring.generateKeyPair(seed);
 
         return Observable.from(
-            fetch('https://lt-relay.saurer.now.sh/api/relay.js?data=' + keys.public)
+            fetch(
+                'https://lt-relay.saurer.now.sh/api/relay.js?data=' +
+                    keys.public
+            )
         )
             .flatMap(result => result.json())
             .map(data =>
-                modalShow({
-                    id: 'AUTH_SECURITY_PROCESS',
-                    type: 'AUTH_SECURITY_PROCESS',
-                    params: {
-                        keys,
-                        password: action.payload,
+                securityProcess.done({
+                    params: action.payload,
+                    result: {
                         SAMLRequest: data.SAMLRequest,
-                        RelayState: data.RelayState
+                        RelayState: data.RelayState,
+                        privateKey: keys.private
                     }
                 })
             )
