@@ -12,9 +12,13 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import { Link, LinkProps } from 'react-router-dom';
-import LinkExternal from './LinkExternal';
+import themed from 'components/Theme/themed';
 
-export default (LinkExternal.withComponent(Link) as any) as React.ComponentType<
-    LinkProps
->;
+export default themed.a`
+    color: #7e6744;
+    font-size: 14px;
+
+    &:hover {
+        color: #a9926f;
+    }
+`;

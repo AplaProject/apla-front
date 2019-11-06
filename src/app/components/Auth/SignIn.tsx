@@ -20,6 +20,7 @@ import Label from 'components/Form/Label';
 import Button from 'components/Form/Button';
 import Link from 'components/Form/Link';
 import Hint from 'components/Form/Hint';
+import LinkExternal from 'components/Form/LinkExternal';
 
 interface Props {
     isValidated: boolean;
@@ -78,9 +79,9 @@ const SignIn: React.SFC<Props> = props => (
                     <div>
                         In case of any questions, please contact your service
                         provider at the following email:&nbsp;
-                        <Link to="mailto:luxembourg.apla.io">
+                        <LinkExternal href="mailto:luxembourg.apla.io">
                             luxembourg@apla.io
-                        </Link>
+                        </LinkExternal>
                     </div>
                 </Hint>
             </div>
