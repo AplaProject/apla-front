@@ -33,7 +33,6 @@ const StyledPage = themed.article`
     flex: 1;
     flex-direction: column;
     min-height: 0;
-    background-color: ${props => props.theme.contentBackground};
     overflow-x: hidden;
     overflow-y: auto;
 `;

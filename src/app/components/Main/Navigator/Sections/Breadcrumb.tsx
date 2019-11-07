@@ -18,7 +18,6 @@ import themed from 'components/Theme/themed';
 import { FormattedMessage } from 'react-intl';
 
 interface Props {
-    home?: boolean;
     active?: boolean;
     section: string;
     page: string;
@@ -30,52 +29,34 @@ interface Props {
 const StyledBreadcrumb = themed.div`
     vertical-align: top;
     display: inline-block;
-
-    &.breadcrumb_active {
-        .breadcrumb__label, .breadcrumb__icon {
-            color: ${props => props.theme.toolbarForegroundPrimary};
-        }
-    }
-
-    .breadcrumb__icon {
-        line-height: inherit;
-        font-size: 20px;
-        color: ${props => props.theme.toolbarForeground};
-        opacity: 0.7;
+    
+    a {
+        color: #7a623e !important;
     }
 
     .breadcrumb__label {
         line-height: inherit;
-        font-size: 14px;
-        color: ${props => props.theme.toolbarForeground};
+        font-size: 16px;
     }
 `;
 
 const placeholder = (
-    <FormattedMessage id="navigation.loaded_page" defaultMessage="Loaded page" />
+    <FormattedMessage
+        id="navigation.loaded_page"
+        defaultMessage="Loaded page"
+    />
 );
 
 const Breadcrumb: React.SFC<Props> = props => {
     const titleText = props.children || placeholder;
-    const title = props.home ?
-        (
-            <em className="breadcrumb__icon fa fa-home" />
-        )
-        :
-        (
-            <span className="breadcrumb__label">{titleText}</span>
-        );
+    const title = <span className="breadcrumb__label">{titleText}</span>;
 
     if (!props.active) {
-        return (
-            <StyledBreadcrumb>
-                {title}
-            </StyledBreadcrumb>
-        );
+        return <StyledBreadcrumb>{title}</StyledBreadcrumb>;
     }
 
     return (
-        <StyledBreadcrumb className="breadcrumb_active">
+        <StyledBreadcrumb>
             <PageLink
                 section={props.section}
                 page={props.page}

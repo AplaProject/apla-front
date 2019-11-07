@@ -60,7 +60,7 @@ class DropdownButton extends React.Component<
                 active: false
             });
         }
-    })
+    });
 
     handleClick = () => {
         if (this.props.onClick) {
@@ -72,13 +72,13 @@ class DropdownButton extends React.Component<
                 active: !this.state.active
             });
         }
-    }
+    };
 
     handleClickOutside = (_event: React.MouseEvent<HTMLElement>) => {
         this.setState({
             active: false
         });
-    }
+    };
 
     render() {
         const Component = this.props.buttonComponent || Button;
@@ -86,8 +86,7 @@ class DropdownButton extends React.Component<
             <div
                 style={{
                     display: 'inline-block',
-                    position: 'relative',
-                    height: '100%'
+                    position: 'relative'
                 }}
             >
                 <Component
@@ -97,7 +96,7 @@ class DropdownButton extends React.Component<
                 >
                     {this.props.children}
                 </Component>
-                <div style={this.props.dropdownStyle}> 
+                <div style={this.props.dropdownStyle}>
                     <Dropdown
                         active={this.state.active}
                         align={this.props.align}

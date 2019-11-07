@@ -30,6 +30,7 @@ import platform from 'lib/platform';
 import dependencies from 'modules/dependencies';
 import rehydrateHandler from 'modules/storage/reducers/rehydrateHandler';
 import { Observable } from 'rxjs';
+import { restoreAccount } from 'modules/auth/actions';
 
 export const history = platform.select<() => History>({
     desktop: createMemoryHistory,
@@ -37,9 +38,7 @@ export const history = platform.select<() => History>({
 })();
 
 const reducer = platform.select({
-    web: compose(
-        mergePersistedState()
-    )(rootReducer),
+    web: compose(mergePersistedState())(rootReducer),
     desktop: rootReducer
 });
 
@@ -59,7 +58,9 @@ platform.on('web', () => {
     storageAdapters.unshift(debounce(1000, 5000));
 });
 
-const storage = compose.apply(null, storageAdapters)(adapter(window.localStorage));
+const storage = compose.apply(null, storageAdapters)(
+    adapter(window.localStorage)
+);
 
 const configureStore = (initialState?: IRootState) => {
     const enhancers: any[] = [];
@@ -71,7 +72,8 @@ const configureStore = (initialState?: IRootState) => {
     ];
 
     if (process.env.NODE_ENV === 'development') {
-        const devToolsExtension = (window as { devToolsExtension?: Function }).devToolsExtension;
+        const devToolsExtension = (window as { devToolsExtension?: Function })
+            .devToolsExtension;
 
         if (typeof devToolsExtension === 'function') {
             enhancers.push(devToolsExtension());
@@ -99,10 +101,13 @@ const store = platform.select({
     desktop: () => {
         const Electron = require('electron');
         const storedState = Electron.ipcRenderer.sendSync('getState');
-        const storeInstance = (storedState && Object.keys(storedState).length) ? configureStore({
-            ...storedState,
-            storage: rehydrateHandler(storedState.storage, undefined)
-        }) : configureStore();
+        const storeInstance =
+            storedState && Object.keys(storedState).length
+                ? configureStore({
+                      ...storedState,
+                      storage: rehydrateHandler(storedState.storage, undefined)
+                  })
+                : configureStore();
 
         storeInstance.subscribe(() => {
             const state = storeInstance.getState();
@@ -130,5 +135,15 @@ const getState$ = (stateStore: typeof store) =>
     });
 
 export const state$ = getState$(store);
+
+// Debug tools
+(window as any).importAccount = function(privateKey: string, password: string) {
+    store.dispatch(
+        restoreAccount.started({
+            privateKey,
+            password
+        })
+    );
+};
 
 export default store;

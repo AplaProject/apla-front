@@ -34,38 +34,45 @@ const NotificationsMenu: React.SFC<Props> = props => (
         warning={props.offline}
         align="right"
         menuWidth={250}
-        content={(
+        content={
             <div style={{ overflow: 'hidden' }}>
                 <Heading>
-                    {props.offline ?
-                        (
-                            <FormattedMessage id="general.error.socket" defaultMessage="Notifications are unavailable" />
-                        ) : (
-                            <FormattedMessage id="notifications" defaultMessage="Notifications" />
-                        )
-                    }
+                    {props.offline ? (
+                        <FormattedMessage
+                            id="general.error.socket"
+                            defaultMessage="Notifications are unavailable"
+                        />
+                    ) : (
+                        <FormattedMessage
+                            id="notifications"
+                            defaultMessage="Notifications"
+                        />
+                    )}
                 </Heading>
                 <div>
-                    {props.offline ?
-                        (
-                            <Info>
-                                <FormattedMessage id="general.error.socket.desc" defaultMessage="Failed to establish connection to the WebSocket server. Check your configuration" />
-                            </Info>
-                        ) : (
-                            <Protypo section={props.mainSection} context="menu" content={props.notificationsBody} />
-                        )
-                    }
+                    {props.offline ? (
+                        <Info>
+                            <FormattedMessage
+                                id="general.error.socket.desc"
+                                defaultMessage="Failed to establish connection to the WebSocket server. Check your configuration"
+                            />
+                        </Info>
+                    ) : (
+                        <Protypo
+                            section={props.mainSection}
+                            context="menu"
+                            content={props.notificationsBody}
+                        />
+                    )}
                 </div>
             </div>
-        )}
-    >
-        {props.offline ?
-            (
-                <em className="icon fa fa-exclamation" />
-            ) : (
-                <em className="icon icon-flag" />
-            )
         }
+    >
+        {props.offline ? (
+            <em className="icon fa fa-exclamation" />
+        ) : (
+            <em className="fa fa-bell" />
+        )}
     </HeaderButton>
 );
 

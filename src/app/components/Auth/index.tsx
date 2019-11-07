@@ -13,7 +13,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import Brand from 'components/Layout/Brand';
 import SignIn from 'containers/Auth/SignIn';
 import Welcome from './Welcome';
@@ -40,6 +40,7 @@ const Auth: React.SFC<Props> = props => (
 
             <Route path="/signup" component={SignUp} />
             <Route path="/recover" component={Recover} />
+            <Redirect to="/" />
         </Switch>
     </Brand>
 );

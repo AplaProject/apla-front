@@ -16,48 +16,13 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import { routes } from 'lib/routing';
 
-import themed from 'components/Theme/themed';
-import media from 'components/Theme/media';
-import Window from 'components/Window';
+import MainLayout from 'components/Layout/Main';
 
 interface Props {
     app?: string;
     page?: string;
     action?: string;
 }
-
-const StyledLayout = themed.main`
-    background: ${props => props.theme.contentBackground};
-    position: relative;
-    display: grid;
-    height: 100%;
-    grid-template-rows: max-content 1fr;
-    grid-template-columns: minmax(auto, 100vw);
-    grid-template-areas:
-        'header'
-        'content';
-    justify-content: stretch;
-    align-content: stretch;
-    overflow: hidden;
-
-    > .layout__header {
-        grid-area: header;
-        z-index: 5;
-    }
-
-    > .layout__content {
-        z-index: 4;
-        grid-area: content;
-        overflow: hidden;
-    }
-
-
-    @media (${media.md}) {
-        > .layout__header {
-            box-shadow: rgba(0,0,0,0.4) 0 2px 5px;
-        }
-    }
-`;
 
 const Main: React.SFC<Props> = props => {
     const Route = routes[props.app];
@@ -66,28 +31,29 @@ const Main: React.SFC<Props> = props => {
     const contentProps =
         Route && Route.mapContentParams ? Route.mapContentParams(props) : props;
 
-    return Route ? (
-        true ? (
-            <Window
-                type="fullscreen"
+    if (Route) {
+        return (
+            <MainLayout
                 header={<Route.Header {...headerProps} />}
+                legal={
+                    <div style={{ textAlign: 'center' }}>
+                        Powered by&nbsp;
+                        <a
+                            href="https://apla.io"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Apla
+                        </a>
+                    </div>
+                }
             >
                 <Route.Content {...contentProps} />
-            </Window>
-        ) : (
-            <StyledLayout>
-                <div className="layout__header">
-                    <Route.Header {...headerProps} />
-                </div>
-
-                <div className="layout__content">
-                    <Route.Content {...contentProps} />
-                </div>
-            </StyledLayout>
-        )
-    ) : (
-        <Redirect to="/browse" />
-    );
+            </MainLayout>
+        );
+    } else {
+        return <Redirect to="/browse" />;
+    }
 };
 
 export default Main;

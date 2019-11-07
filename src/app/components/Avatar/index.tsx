@@ -12,7 +12,7 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import imgAvatar from './avatar.svg';
 
@@ -38,7 +38,7 @@ class Avatar extends React.Component<IAvatarProps, IAvatarState> {
         this.setState({
             error: true
         });
-    }
+    };
 
     render() {
         return (
@@ -53,14 +53,15 @@ class Avatar extends React.Component<IAvatarProps, IAvatarState> {
     }
 }
 
-export default styled(Avatar) `
+export default styled(Avatar)`
     display: inline-block;
     vertical-align: top;
-    width: ${props => props.size ? props.size + 'px' : 'auto'};
-    height: ${props => props.size ? props.size + 'px' : 'auto'};
+    width: ${props => (props.size ? props.size + 'px' : 'auto')};
+    height: ${props => (props.size ? props.size + 'px' : 'auto')};
 
     .avatar__image {
-        max-width: ${props => props.size ? props.size + 'px' : '100%'};
-        max-height: ${props => props.size ? props.size + 'px' : '100%'};
+        max-width: ${props => (props.size ? props.size + 'px' : '100%')};
+        max-height: ${props => (props.size ? props.size + 'px' : '100%')};
+        vertical-align: top;
     }
 `;

@@ -16,8 +16,8 @@ import React from 'react';
 import { ISection } from 'apla/content';
 
 import Section from './Section';
-import Menu from 'containers/Main/Navigator/Menu';
 import themed from 'components/Theme/themed';
+import Breadcrumbs from './Breadcrumbs';
 
 interface Props {
     className?: string;
@@ -30,9 +30,9 @@ interface Props {
     };
 }
 
-const Sections: React.SFC<Props> = (props) => (
+const Sections: React.SFC<Props> = props => (
     <div className={props.className}>
-        <Menu section={props.section} />
+        <Breadcrumbs values={props.values[props.section].breadcrumbs} />
         <Section
             name={props.section}
             folded={props.folded}

@@ -22,49 +22,33 @@ import Avatar from 'containers/Avatar';
 import themed from 'components/Theme/themed';
 import Item from 'components/Dropdown/Item';
 import media from 'components/Theme/media';
-// import Heading from 'components/Dropdown/Heading';
 
 const StyledUserMenu = themed.div`
-    -webkit-app-region: no-drag;
-    line-height: 0;
     display: inline-block;
-    vertical-align: top;
-    height: 100%;   
-    padding: 0 0 0 10px !important;
-    line-height: 18px;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0 15px 0 50px !important;
     flex-direction: row;
+    height: 40px;
+    background: linear-gradient(#5e5e5e, #444444);
+    border-radius: 20px;
+    position: relative;
 
     > .user-info {
-        text-align: right;
-        float: left;
-        margin-right: 5px;
-        white-space: nowrap;
-        max-width: 170px;
-
-        > .user-title {
-            margin-top: 4px;
-            font-size: 14px;
-            font-weight: 600;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        > .user-subtitle {
-            text-transform: uppercase;
-            font-size: 13px;
-            font-weight: 300;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        color: #fff;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 40px;
     }
 
     > .user-avatar {
-        float: right;
-        margin: 4px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        border: solid 2px #fff;
+        overflow: hidden;
     }
 
     .user-dropdown {
@@ -74,10 +58,11 @@ const StyledUserMenu = themed.div`
         border-bottom: solid 1px #add1ff;
     }
 
-    @media (${media.md}) {
+    @media (${media.lg}) {
         padding: 0 !important;
-        
-        .user-info {
+        width: 40px;
+
+        > .user-info {
             display: none;
         }
     }
@@ -93,69 +78,58 @@ interface Props {
     onBackup: () => void;
 }
 
-const UserMenu: React.SFC<Props> = props => props.wallet && props.wallet.wallet && (
-    <HeaderButton
-        align="right"
-        menuWidth={216}
-        content={
-            <div>
-                {!props.isDefaultWallet && (
-                    <>
-                        <Item onClick={props.onChangePassword} icon="icon-key text-muted">
-                            <FormattedMessage id="general.wallet.changepassword" defaultMessage="Change password" />
-                        </Item>
-                        <Item onClick={props.onBackup} icon="icon-shield text-muted">
-                            <FormattedMessage id="general.wallet.backup" defaultMessage="Backup account" />
-                        </Item>
-                    </>
-                )}
-                <Item onClick={props.onLogout} icon="icon-logout text-danger">
-                    <FormattedMessage id="general.wallet.signout" defaultMessage="Sign out" />
-                </Item>
-                {/* <Heading>
-                    <FormattedMessage id="general.ecosystems" defaultMessage="Ecosystems" />
-                </Heading>
-                {props.walletEcosystems.map(value => (
-                    <Item key={value.ecosystem} onClick={() => props.onSwitchEcosystem(value.ecosystem, !value.roles.length)}>
-                        {value.name ?
-                            (
-                                value.name
-                            ) :
-                            (
-                                <FormattedMessage id="general.wallet.ecosystemNo" defaultMessage="Ecosystem #{ecosystem}" values={{ ecosystem: value.ecosystem }} />
-                            )
-                        }
-                    </Item>
-                ))} */}
-            </div>
-        }
-    >
-        <StyledUserMenu>
-            <div className="user-info">
-                <div className="user-title">
-                    {props.isDefaultWallet ?
-                        (
-                            <FormattedMessage id="auth.login.guest" defaultMessage="Demo" />
-                        ) :
-                        (
-                            <span>{props.wallet.wallet.address}</span>
-                        )
-                    }
-                </div>
-                <div className="user-subtitle">
-                    {props.wallet.access.name || (
-                        <FormattedMessage id="general.wallet.ecosystemNo" defaultMessage="Ecosystem #{ecosystem}" values={{ ecosystem: props.wallet.access.ecosystem }} />
+const UserMenu: React.SFC<Props> = props =>
+    props.wallet &&
+    props.wallet.wallet && (
+        <HeaderButton
+            align="right"
+            menuWidth={216}
+            content={
+                <div>
+                    {!props.isDefaultWallet && (
+                        <>
+                            <Item
+                                onClick={props.onChangePassword}
+                                icon="icon-key text-muted"
+                            >
+                                <FormattedMessage
+                                    id="general.wallet.changepassword"
+                                    defaultMessage="Change password"
+                                />
+                            </Item>
+                            <Item
+                                onClick={props.onBackup}
+                                icon="icon-shield text-muted"
+                            >
+                                <FormattedMessage
+                                    id="general.wallet.backup"
+                                    defaultMessage="Backup account"
+                                />
+                            </Item>
+                        </>
                     )}
+                    <Item
+                        onClick={props.onLogout}
+                        icon="icon-logout text-danger"
+                    >
+                        <FormattedMessage
+                            id="general.wallet.signout"
+                            defaultMessage="Sign out"
+                        />
+                    </Item>
                 </div>
-            </div>
-            <Avatar
-                className="user-avatar"
-                size={32}
-                account={props.wallet.wallet.address}
-                ecosystem={props.wallet.access.ecosystem}
-            />
-        </StyledUserMenu>
-    </HeaderButton>
-);
+            }
+        >
+            <StyledUserMenu>
+                <div className="user-info">{props.wallet.wallet.address}</div>
+                <Avatar
+                    className="user-avatar"
+                    size={36}
+                    account={props.wallet.wallet.address}
+                    ecosystem={props.wallet.access.ecosystem}
+                />
+            </StyledUserMenu>
+        </HeaderButton>
+    );
 
 export default UserMenu;
