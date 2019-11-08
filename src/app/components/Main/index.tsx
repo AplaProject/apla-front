@@ -17,6 +17,7 @@ import { Redirect } from 'react-router';
 import { routes } from 'lib/routing';
 
 import MainLayout from 'components/Layout/Main';
+import Power from 'components/Legal/Power';
 
 interface Props {
     app?: string;
@@ -35,18 +36,7 @@ const Main: React.SFC<Props> = props => {
         return (
             <MainLayout
                 header={<Route.Header {...headerProps} />}
-                legal={
-                    <div style={{ textAlign: 'center' }}>
-                        Powered by&nbsp;
-                        <a
-                            href="https://apla.io"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Apla
-                        </a>
-                    </div>
-                }
+                legal={<Power />}
             >
                 <Route.Content {...contentProps} />
             </MainLayout>

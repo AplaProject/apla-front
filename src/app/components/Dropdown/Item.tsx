@@ -20,23 +20,20 @@ import media from 'components/Theme/media';
 
 const StyledItem = themed.button`
     border-radius: 0;
-    outline: 0;
     border: 0;
+    outline: 0;
     background: 0;
     transition: background .15s;
     width: 100%;
-    padding: 0 12px;
+    padding: 0 20px;
     margin: 0;
-    height: 40px;
-    line-height: 40px;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 300;
     text-decoration: none;
-    color: ${props => props.theme.dropdownMenuForeground};
+    color: #4c4c4c;
     cursor: pointer;
     display: block;
     text-align: left;
-    border: dashed 1px transparent;
     position: relative;
     white-space: nowrap;
 
@@ -58,16 +55,21 @@ const StyledItem = themed.button`
         }
     }
 
+    &:last-child > .item__title {
+        border-bottom: 0;
+    }
+
+    > .item__title {
+        border-bottom: solid 1px #dbd9d6;
+        line-height: 37px;
+    }
+
     &[disabled] {
         color: ${props => props.theme.dropdownMenuDisabled};
     }
 
     &:hover {
-        background: ${props => props.theme.dropdownMenuActive};
-    }
-
-    &:focus {
-        border-color: #84baff;
+        background: #f2f0ed;
     }
 
     @media (${media.md}) {
@@ -99,14 +101,18 @@ const Item: React.SFC<Props> = (props, context) => {
     };
 
     return (
-        <StyledItem disabled={props.disabled} onClick={handleClick} className={classNames({ item_hasicon: !!props.icon })}>
-            {props.icon && (
-                <div className="item__icon">
-                    <em className={props.icon} />
-                </div>
-            )}
-            <div>
-                {props.children}
+        <StyledItem
+            disabled={props.disabled}
+            onClick={handleClick}
+            className={classNames({ item_hasicon: !!props.icon })}
+        >
+            <div className="item__title">
+                {props.icon && (
+                    <div className="item__icon">
+                        <em className={props.icon} />
+                    </div>
+                )}
+                <div>{props.children}</div>
             </div>
         </StyledItem>
     );

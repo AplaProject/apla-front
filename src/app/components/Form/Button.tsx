@@ -20,16 +20,18 @@ type Theme = 'primary' | 'link';
 
 interface Props extends React.HTMLProps<HTMLButtonElement> {
     block?: boolean;
+    slim?: boolean;
     color?: Theme;
 }
 
 const Button: React.SFC<Props> = props => {
-    const { color, block, ...buttonProps } = props;
+    const { color, block, slim, ...buttonProps } = props;
     const className = classNames(
         props.className,
         `button_theme-${color || 'primary'}`,
         {
-            button_block: block
+            button_block: block,
+            button_slim: slim
         }
     );
 
@@ -66,6 +68,10 @@ export default themed(Button)`
     &.button_block {
         box-sizing: border-box;
         width: 100%;        
+    }
+
+    &.button_slim {
+        padding: 2px 10px;
     }
 
     &.button_theme-link {

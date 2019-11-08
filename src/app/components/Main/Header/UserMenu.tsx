@@ -28,15 +28,42 @@ const StyledUserMenu = themed.div`
     padding: 0 15px 0 50px !important;
     flex-direction: row;
     height: 40px;
-    background: linear-gradient(#5e5e5e, #444444);
     border-radius: 20px;
     position: relative;
+    vertical-align: middle;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: linear-gradient(#5e5e5e, #444444);
+        opacity: 0;
+        transition: opacity .15s ease-in-out;
+        border-radius: 20px;
+        z-index: 0;
+    }
+
+    &:hover:before {
+        opacity: 1;
+    }
 
     > .user-info {
         color: #fff;
         font-weight: 500;
         font-size: 16px;
         line-height: 40px;
+        position: relative;
+        z-index: 1;
+
+        &:after {
+            margin-left: 5px;
+            content: '▾';
+            display: inline-block;
+            vertical-align: top;
+        }
     }
 
     > .user-avatar {
@@ -49,6 +76,7 @@ const StyledUserMenu = themed.div`
         border-radius: 20px;
         border: solid 2px #fff;
         overflow: hidden;
+        z-index: 2;
     }
 
     .user-dropdown {
@@ -88,19 +116,13 @@ const UserMenu: React.SFC<Props> = props =>
                 <div>
                     {!props.isDefaultWallet && (
                         <>
-                            <Item
-                                onClick={props.onChangePassword}
-                                icon="icon-key text-muted"
-                            >
+                            <Item onClick={props.onChangePassword}>
                                 <FormattedMessage
                                     id="general.wallet.changepassword"
                                     defaultMessage="Change password"
                                 />
                             </Item>
-                            <Item
-                                onClick={props.onBackup}
-                                icon="icon-shield text-muted"
-                            >
+                            <Item onClick={props.onBackup}>
                                 <FormattedMessage
                                     id="general.wallet.backup"
                                     defaultMessage="Backup account"
@@ -108,10 +130,7 @@ const UserMenu: React.SFC<Props> = props =>
                             </Item>
                         </>
                     )}
-                    <Item
-                        onClick={props.onLogout}
-                        icon="icon-logout text-danger"
-                    >
+                    <Item onClick={props.onLogout}>
                         <FormattedMessage
                             id="general.wallet.signout"
                             defaultMessage="Sign out"

@@ -23,7 +23,8 @@ const StyledDropdown = themed.div`
     line-height: normal;
     background: ${props => props.theme.dropdownMenuBackground};
     box-shadow: 0 0 15px rgba(0,0,0,.15);
-    border-radius: 4px;
+    border-radius: 16px;
+    padding: 8px 0;
     border-top: none;
     text-align: left;
     overflow: hidden;

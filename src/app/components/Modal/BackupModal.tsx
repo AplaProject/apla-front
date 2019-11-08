@@ -20,7 +20,7 @@ import QRCode from 'qrcode.react';
 
 import Modal from './';
 import ModalWindow from 'containers/Modal/ModalWindow';
-import Button from 'components/Button/Button';
+import Button from 'components/Form/Button';
 
 interface Props {
     privateKey: string;
@@ -37,7 +37,7 @@ class BackupModal extends Modal<Props, void> {
             `${this.props.params.address || 'account'}.txt`,
             this.props.params.privateKey
         );
-    }
+    };
 
     render() {
         return (
@@ -48,11 +48,22 @@ class BackupModal extends Modal<Props, void> {
                         defaultMessage="Backup account"
                     />
                 }
-                controls={(
-                    <Button onClick={this.props.onCancel}>
-                        <FormattedMessage id="close" defaultMessage="Close" />
-                    </Button>
-                )}
+                controls={
+                    <>
+                        <Button color="link" onClick={this.props.onCancel}>
+                            <FormattedMessage
+                                id="close"
+                                defaultMessage="Close"
+                            />
+                        </Button>
+                        <Button onClick={this.onKeyDownload}>
+                            <FormattedMessage
+                                id="general.download.asfile"
+                                defaultMessage="Download as file"
+                            />
+                        </Button>
+                    </>
+                }
             >
                 <table
                     className="table table-striped table-bordered table-hover preline"
@@ -72,7 +83,7 @@ class BackupModal extends Modal<Props, void> {
                                     text={this.props.params.privateKey}
                                     onCopy={this.props.params.onCopy}
                                 >
-                                    <Button type="link" className="p0 ml">
+                                    <Button slim className="ml">
                                         <FormattedMessage
                                             id="general.clipboard.copy"
                                             defaultMessage="Copy to clipboard"
@@ -122,14 +133,6 @@ class BackupModal extends Modal<Props, void> {
                         </tr>
                     </tbody>
                 </table>
-                <div className="text-center">
-                    <Button type="link" onClick={this.onKeyDownload}>
-                        <FormattedMessage
-                            id="general.download.asfile"
-                            defaultMessage="Download as file"
-                        />
-                    </Button>
-                </div>
             </ModalWindow>
         );
     }
