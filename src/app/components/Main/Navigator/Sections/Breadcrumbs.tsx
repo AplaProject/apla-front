@@ -18,6 +18,7 @@ import { IBreadcrumb } from 'apla/content';
 
 import themed from 'components/Theme/themed';
 import Breadcrumb from './Breadcrumb';
+import media from 'components/Theme/media';
 
 interface Props {
     values: IBreadcrumb[];
@@ -50,6 +51,10 @@ const StyledBreadcrumbs = themed.ul`
             display: inline-block;
             margin-right: 8px;
         }
+    }
+
+    @media(${media.sm}) {
+        display: none;
     }
 `;
 

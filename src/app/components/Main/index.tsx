@@ -18,6 +18,7 @@ import { routes } from 'lib/routing';
 
 import MainLayout from 'components/Layout/Main';
 import Power from 'components/Legal/Power';
+import MainTabs from 'containers/Main/MainTabs';
 
 interface Props {
     app?: string;
@@ -36,6 +37,7 @@ const Main: React.SFC<Props> = props => {
         return (
             <MainLayout
                 header={<Route.Header {...headerProps} />}
+                tabs={<MainTabs />}
                 legal={<Power />}
             >
                 <Route.Content {...contentProps} />

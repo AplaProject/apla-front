@@ -22,6 +22,7 @@ import { modalShow, modalClose } from 'modules/modal/actions';
 import { push } from 'connected-react-router';
 import { renderPage } from 'modules/sections/actions';
 import { createEditorTab, loadEditorTab } from 'modules/editor/actions';
+import { backupAccount, changePassword } from 'modules/auth/actions';
 
 const buttonInteractionEpic: Epic = (action$, store, { routerService }) => action$.ofAction(buttonInteraction)
     // Show confirmation window if there is any
@@ -99,7 +100,14 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                 const dd = date.getDate();
                 const mm = ('0' + (1 + date.getMonth())).slice(-2);
                 const yyyy = date.getFullYear();
-                if ('SIGN_PDF' === action.payload.page.name) {
+
+                if ('@backup' === action.payload.page.name) {
+                    return Observable.of(backupAccount());
+                }
+                else if ('@password' === action.payload.page.name) {
+                    return Observable.of(changePassword.started(null));
+                }
+                else if ('SIGN_PDF' === action.payload.page.name) {
                     return Observable.of(signPdf({
                         name: action.payload.page.params.Name,
                         company: action.payload.page.params.Company,

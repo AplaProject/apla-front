@@ -19,6 +19,7 @@ import media from 'components/Theme/media';
 interface Props {
     className?: string;
     header?: React.ReactNode;
+    tabs?: React.ReactNode;
     legal?: React.ReactNode;
 }
 
@@ -27,13 +28,14 @@ const Main: React.SFC<Props> = props => (
         <div className="main__nav">{props.header}</div>
         <div className="main__content">{props.children}</div>
         <div className="main__legal">{props.legal}</div>
+        <div className="main__tabs">{props.tabs}</div>
     </div>
 );
 
 export default themed(Main)`
     background: #f6f6f6;
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: min-content 1fr min-content;
     grid-template-columns: 1fr;
     grid-template-areas:
         'nav'
@@ -42,7 +44,7 @@ export default themed(Main)`
     align-items: center;
     padding: 20px;
     min-height: ${media.standalone ? '100vh' : 'calc(var(--vh, 1vh) * 100)'};
-    overflow-y: hidden;
+    overflow-x: hidden;
 
     & .main__nav {
         grid-area: nav;
@@ -54,6 +56,7 @@ export default themed(Main)`
         grid-area: content;
         z-index: 1;
         padding: 0 20px;
+        overflow-x: hidden;
     }
 
     & .main__legal {
@@ -61,7 +64,37 @@ export default themed(Main)`
         z-index: 2;
     }
 
-    .hidden-lg.hidden-lg.hidden-lg.hidden-lg.hidden-lg.hidden-lg.hidden-lg.hidden-lg.hidden-lg {
-        display: block !important;
+    & .main__tabs {
+        grid-area: tabs;
+        z-index: 2;
+        display: none;
+    }
+
+    @media (${media.sm}) {
+        padding: 0;
+        grid-template-rows: 1fr min-content;
+        grid-template-areas:
+            'content'
+            'tabs';
+
+            & .main__nav {
+                display: none;
+            }
+        
+            & .main__legal {
+                display: none;
+            }
+
+            & .main__content {
+                padding-bottom: 60px;
+            }
+
+            & .main__tabs {
+                display: initial;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
     }
 `;
