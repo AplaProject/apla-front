@@ -32,8 +32,11 @@ const Notification: React.SFC<INotificationProps> = props => (
                 <em className={props.proto.icon} />
             </div>
         )}
-        <div className="notification-title">{typeof props.proto.title === 'function' ? props.proto.title(props.params) : props.proto.title}</div>
-        <div className="notification-body">{typeof props.proto.body === 'function' ? props.proto.body(props.params) : props.proto.body}</div>
+        <div className="notification-body">
+            {typeof props.proto.body === 'function'
+                ? props.proto.body(props.params)
+                : props.proto.body}
+        </div>
         {/*<div className="notification-controls">
             <NotificationButton>Confirm</NotificationButton>
             <NotificationButton>Cancel</NotificationButton>
@@ -41,31 +44,26 @@ const Notification: React.SFC<INotificationProps> = props => (
     </div>
 );
 
-export default themed(Notification) `
-    background: ${props => props.theme.notificationBackground};
-    width: 350px;
+export default themed(Notification)`
+    background: #238fd1;
     margin-bottom: 15px;
-    padding: 15px;
+    padding: 8px 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 20px;
 
     .notification-icon {
-        float: left;
-        font-size: 30px;
-        color: ${props => props.theme.notificationIconColor};
+        font-size: 16px;
+        color: #d5e9f5;
         vertical-align: top;
         margin-right: 15px;
-        margin-left: 5px;
-        width: 30px;
         text-align: right;
-    }
-
-    .notification-title {
-        font-size: 15px;
-        color: ${props => props.theme.notificationPrimaryForeground};
     }
 
     .notification-body {
         font-size: 14px;
-        color: ${props => props.theme.notificationForeground};
+        color: #d5e9f5;
     }
 
     .notification-controls {

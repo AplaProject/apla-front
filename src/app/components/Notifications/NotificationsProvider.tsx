@@ -45,9 +45,14 @@ class NotificationsProvider extends React.Component<
             <div
                 style={{
                     position: 'fixed',
-                    bottom: 20,
-                    right: 20,
-                    zIndex: 10000
+                    top: 30,
+                    left: 0,
+                    right: 0,
+                    textAlign: 'center',
+                    zIndex: 10000,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
                 }}
             >
                 <StreamGroup

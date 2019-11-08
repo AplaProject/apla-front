@@ -12,29 +12,25 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import * as React from 'react';
+import React from 'react';
 import Transition from 'react-transition-group/Transition';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 const animationDuration = 300;
 const animationDef = {
     defaultStyle: {
-        transform: 'translateX(0)',
         transition: `transform ${animationDuration}ms cubic-bezier(0,0.5,0.5,1),opacity ${animationDuration}ms`,
         opacity: 1
     },
     entering: {
-        transform: 'translateX(50px)',
-        opacity: 0,
+        opacity: 0
     },
     entered: {
-        transform: 'translateX(0)',
-        opacity: 1,
+        opacity: 1
     },
     exiting: {
-        transform: 'translateX(50px)',
-        transition: `transform ${animationDuration}ms cubic-bezier(1,0.4,0.2,1),opacity ${animationDuration}ms`,        
-        opacity: 0,
+        transition: `transform ${animationDuration}ms cubic-bezier(1,0.4,0.2,1),opacity ${animationDuration}ms`,
+        opacity: 0
     },
     exited: {
         display: 'none'
@@ -44,7 +40,9 @@ const animationDef = {
 const Fade: React.SFC<{ in?: boolean }> = props => (
     <Transition in={props.in} timeout={{ enter: 0, exit: animationDuration }}>
         {(state: string) => (
-            <div style={{ ...animationDef.defaultStyle, ...animationDef[state] }}>
+            <div
+                style={{ ...animationDef.defaultStyle, ...animationDef[state] }}
+            >
                 {props.children}
             </div>
         )}
@@ -61,9 +59,7 @@ export interface IStreamGroupProps {
 const StreamGroup: React.SFC<IStreamGroupProps> = props => (
     <TransitionGroup>
         {props.items.map(item => (
-            <Fade key={item.key}>
-                {item.content}
-            </Fade>
+            <Fade key={item.key}>{item.content}</Fade>
         ))}
     </TransitionGroup>
 );

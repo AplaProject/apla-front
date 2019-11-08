@@ -15,7 +15,7 @@
 import { INotificationProto } from 'apla/notifications';
 
 const CopiedToClipboard: INotificationProto<void> = {
-    icon: 'o-checkround-1',
+    icon: 'fa fa-info-circle',
     title: '',
     body: params => 'Successfully copied to clipboard'
 };
