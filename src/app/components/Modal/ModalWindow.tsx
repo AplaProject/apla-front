@@ -59,7 +59,7 @@ export default themed(ModalWindow)`
         background: #fff;
         color: #808080;
         font-size: 14px;
-        padding: 20px;
+        padding: 20px 40px;
         max-width: 100%;
     }
 
@@ -99,7 +99,7 @@ export default themed(ModalWindow)`
 
     .modalWindow__controls {
         border-top: solid 1px #e6e6e6;
-        margin: 20px -20px 0 -20px;
+        margin: 20px -40px 0 -40px;
         padding: 15px 20px 0;
         display: flex;
         flex-direction: row;

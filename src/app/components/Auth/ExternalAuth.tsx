@@ -13,7 +13,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import React from 'react';
-import Hint from 'components/Form/Hint';
+import Hint from 'components/Typo/Hint';
 
 interface Props {
     SAMLRequest: string;

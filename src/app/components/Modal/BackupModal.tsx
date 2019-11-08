@@ -16,11 +16,12 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { sendAttachment } from 'lib/fs';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import QRCode from 'qrcode.react';
 
 import Modal from './';
 import ModalWindow from 'containers/Modal/ModalWindow';
 import Button from 'components/Form/Button';
+import QRCode from 'components/Typo/QRCode';
+import Info from 'components/Typo/Info';
 
 interface Props {
     privateKey: string;
@@ -39,6 +40,10 @@ class BackupModal extends Modal<Props, void> {
         );
     };
 
+    handleCopy = () => {
+        this.props.notify('COPIED_TO_CLIPBOARD', {});
+    };
+
     render() {
         return (
             <ModalWindow
@@ -50,13 +55,17 @@ class BackupModal extends Modal<Props, void> {
                 }
                 controls={
                     <>
-                        <Button color="link" onClick={this.props.onCancel}>
+                        <Button
+                            block
+                            color="link"
+                            onClick={this.props.onCancel}
+                        >
                             <FormattedMessage
                                 id="close"
                                 defaultMessage="Close"
                             />
                         </Button>
-                        <Button onClick={this.onKeyDownload}>
+                        <Button block onClick={this.onKeyDownload}>
                             <FormattedMessage
                                 id="general.download.asfile"
                                 defaultMessage="Download as file"
@@ -65,74 +74,31 @@ class BackupModal extends Modal<Props, void> {
                     </>
                 }
             >
-                <table
-                    className="table table-striped table-bordered table-hover preline"
-                    style={{ wordBreak: 'break-all' }}
-                >
-                    <tbody>
-                        <tr>
-                            <td style={{ minWidth: 100 }}>
-                                <FormattedMessage
-                                    id="general.key.private"
-                                    defaultMessage="Private key"
-                                />
-                            </td>
-                            <td>
-                                <span>{this.props.params.privateKey}</span>
-                                <CopyToClipboard
-                                    text={this.props.params.privateKey}
-                                    onCopy={this.props.params.onCopy}
-                                >
-                                    <Button slim className="ml">
-                                        <FormattedMessage
-                                            id="general.clipboard.copy"
-                                            defaultMessage="Copy to clipboard"
-                                        />
-                                    </Button>
-                                </CopyToClipboard>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style={{ minWidth: 100 }}>
-                                <FormattedMessage
-                                    id="general.key.public"
-                                    defaultMessage="Public key"
-                                />
-                            </td>
-                            <td>{this.props.params.publicKey}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <FormattedMessage
-                                    id="general.address"
-                                    defaultMessage="Address"
-                                />
-                            </td>
-                            <td>{this.props.params.address}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <FormattedMessage
-                                    id="auth.qrcode"
-                                    defaultMessage="QR-Code"
-                                />
-                            </td>
-                            <td>
-                                <div className="text-center">
-                                    <QRCode
-                                        value={this.props.params.privateKey}
-                                    />
-                                    <div className="text-muted">
-                                        <FormattedMessage
-                                            id="auth.qrcode.desc"
-                                            defaultMessage="Use this code to import the account on your mobile device"
-                                        />
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <QRCode value={this.props.params.privateKey}>
+                    Use QR-Code to import the account on your mobile device
+                </QRCode>
+
+                <Info title="Private Key" icon="fa fa-key">
+                    <div>{this.props.params.privateKey}</div>
+                    <div style={{ textAlign: 'right' }}>
+                        <CopyToClipboard
+                            text={this.props.params.privateKey}
+                            onCopy={this.handleCopy}
+                        >
+                            <Button slim icon="fa fa-files-o">
+                                Copy To Clipboard
+                            </Button>
+                        </CopyToClipboard>
+                    </div>
+                </Info>
+
+                <Info title="Public Key" icon="fa fa-key">
+                    {this.props.params.publicKey}
+                </Info>
+
+                <Info title="Account" icon="fa fa-credit-card">
+                    {this.props.params.address}
+                </Info>
             </ModalWindow>
         );
     }

@@ -21,12 +21,14 @@ import TxSuccessNotification from './Types/TxSuccessNotification';
 import InvalidPasswordNotification from './Types/InvalidPasswordNotification';
 import TxBatchNotification from './Types/TxBatchNotification';
 import EcosystemInvitedNotification from './Types/EcosystemInvitedNotification';
+import CopiedToClipboard from './Types/CopiedToClipboard';
 
 const definitions: { [key: string]: INotificationProto<any> } = {
-    'TX_BATCH': TxBatchNotification,
-    'TX_SUCCESS': TxSuccessNotification,
-    'INVALID_PASSWORD': InvalidPasswordNotification,
-    'ECOSYSTEM_INVITED': EcosystemInvitedNotification
+    TX_BATCH: TxBatchNotification,
+    TX_SUCCESS: TxSuccessNotification,
+    INVALID_PASSWORD: InvalidPasswordNotification,
+    ECOSYSTEM_INVITED: EcosystemInvitedNotification,
+    COPIED_TO_CLIPBOARD: CopiedToClipboard
 };
 
 export interface INotificationsProviderProps {
@@ -35,19 +37,33 @@ export interface INotificationsProviderProps {
     destroyNotification: (id: string) => void;
 }
 
-class NotificationsProvider extends React.Component<INotificationsProviderProps> {
+class NotificationsProvider extends React.Component<
+    INotificationsProviderProps
+> {
     render() {
         return (
-            <div style={{ position: 'fixed', bottom: 20, right: 20, zIndex: 10000 }}>
+            <div
+                style={{
+                    position: 'fixed',
+                    bottom: 20,
+                    right: 20,
+                    zIndex: 10000
+                }}
+            >
                 <StreamGroup
                     items={this.props.notifications.map(n => {
                         const proto = definitions[n.type];
-                        return proto ? {
-                            key: n.id,
-                            content: (
-                                <Notification proto={proto} params={n.params} />
-                            )
-                        } : null;
+                        return proto
+                            ? {
+                                  key: n.id,
+                                  content: (
+                                      <Notification
+                                          proto={proto}
+                                          params={n.params}
+                                      />
+                                  )
+                              }
+                            : null;
                     })}
                 />
             </div>

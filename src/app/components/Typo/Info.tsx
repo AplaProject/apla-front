@@ -14,29 +14,56 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
+import classNames from 'classnames';
 
 interface Props {
     className?: string;
     icon?: string;
+    title: string;
 }
 
-const Hint: React.SFC<Props> = props => (
+const Info: React.SFC<Props> = props => (
     <div className={props.className}>
-        {props.icon && (
-            <div className="hint__icon">
-                <em className="fa fa-info-circle" />
-            </div>
-        )}
-        <div className="hint__content">{props.children}</div>
+        <div className="info__heading">
+            {props.icon && (
+                <em className={classNames('info__icon', props.icon)} />
+            )}
+            <span className="info__title">{props.title}</span>
+        </div>
+        <div className="info__content">{props.children}</div>
     </div>
 );
 
-export default themed(Hint)`
-    display: flex;
-    flex-direction: row;
+export default themed(Info)`
+    margin-bottom: 30px;
+
+    .info__heading {
+        margin-bottom: 10px;
+        line-height: 16px;
+    }
+
+    .info__title {
+        font-size: 16px;
+        color: #4c4c4c;
+        font-weight: 500;
+        vertical-align: top;
+    }
+
+    .info__icon {
+        float: left;
+        font-size: 15px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+
+    .info__content {
+        color: #848484;
+        font-size: 16px;
+        word-break: break-all;
+    }
 
     & .hint__icon {
-        width: 50px;
+        width: 35px;
         text-align: center;
 
         > .fa {

@@ -19,7 +19,7 @@ import Validation from 'components/Validation';
 import Label from 'components/Form/Label';
 import Button from 'components/Form/Button';
 import Link from 'components/Form/Link';
-import Hint from 'components/Form/Hint';
+import Hint from 'components/Typo/Hint';
 import LinkExternal from 'components/Form/LinkExternal';
 
 interface Props {
