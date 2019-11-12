@@ -17,11 +17,11 @@ import { FormattedMessage } from 'react-intl';
 import ModalWindow from 'containers/Modal/ModalWindow';
 
 import Modal from '../';
-import Button from 'components/Button/Button';
+import Button from 'components/Form/Button';
 
 class AuthPasswordChangedModal extends Modal<{}, void> {
     public static className = ' ';
-    
+
     render() {
         return (
             <ModalWindow
@@ -31,11 +31,11 @@ class AuthPasswordChangedModal extends Modal<{}, void> {
                         defaultMessage="Information"
                     />
                 }
-                controls={(
-                    <Button onClick={this.props.onCancel}>
+                controls={
+                    <Button block onClick={this.props.onCancel}>
                         <FormattedMessage id="close" defaultMessage="Close" />
                     </Button>
-                )}
+                }
             >
                 <FormattedMessage
                     id="auth.password.changed"
