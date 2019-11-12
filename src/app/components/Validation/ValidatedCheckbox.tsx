@@ -144,6 +144,7 @@ export default themed(ValidatedCheckbox)`
         border-radius: 4px;
         border: solid 1px #7a623e;
         background: #fff;
+        text-align: center;
         
         &:before {
             color: #7a623e;
