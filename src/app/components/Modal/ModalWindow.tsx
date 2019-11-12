@@ -116,5 +116,9 @@ export default themed(ModalWindow)`
         .modalWindow__content {
             padding: 20px;
         }
+
+        .modalWindow__controls {
+            margin: 20px -20px 0 -20px;
+        }
     }
 `;
