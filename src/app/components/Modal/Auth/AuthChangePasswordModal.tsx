@@ -20,7 +20,7 @@ import Modal from '../';
 import Validation from 'components/Validation';
 import ModalWindow from 'containers/Modal/ModalWindow';
 import ValidatedForm from 'components/Validation/ValidatedForm';
-import Button from 'components/Button/Button';
+import Button from 'components/Form/Button';
 import Label from 'components/Form/Label';
 
 interface Params {
@@ -69,20 +69,20 @@ class AuthChangePasswordModal extends Modal<Params, Result, State> {
                 newPassword: form.payload.password_new.value
             });
         }
-    }
+    };
 
     onNewPasswordChange = (value: string) => {
         this.setState({
             newPassword: value,
             newPasswordKey: Math.random().toString()
         });
-    }
+    };
 
     onNewPasswordRepeatChange = (value: string) => {
         this.setState({
             newPasswordRepeat: value
         });
-    }
+    };
 
     render() {
         return (
@@ -93,16 +93,20 @@ class AuthChangePasswordModal extends Modal<Params, Result, State> {
                         defaultMessage="Change password"
                     />
                 }
-                width={400}
+                width={500}
                 controls={
                     <>
-                        <Button type="link" onClick={this.props.onCancel}>
+                        <Button
+                            block
+                            color="link"
+                            onClick={this.props.onCancel}
+                        >
                             <FormattedMessage
                                 id="cancel"
                                 defaultMessage="Cancel"
                             />
                         </Button>
-                        <Button onClick={this.handleSubmit}>
+                        <Button block onClick={this.handleSubmit}>
                             <FormattedMessage
                                 id="confirm"
                                 defaultMessage="Confirm"
