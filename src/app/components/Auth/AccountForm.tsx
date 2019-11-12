@@ -108,58 +108,62 @@ class AccountForm extends React.Component<Props, State> {
             <Validation.components.ValidatedForm
                 onSubmitSuccess={this.handleSubmit}
             >
-                <Validation.components.ValidatedFormGroup
-                    for="name"
-                    disabled={this.state.useExternal}
-                >
-                    <div>
-                        <Label disabled={this.state.useExternal}>Name</Label>
-                    </div>
-                    <div>
-                        <Validation.components.ValidatedControl
-                            disabled={this.state.useExternal}
-                            type="text"
-                            name="name"
-                            value={this.state.name}
-                            onChange={this.handleNameChange as any}
-                            placeholder="Name Surname"
-                            validators={
-                                this.state.useExternal
-                                    ? []
-                                    : [Validation.validators.required]
-                            }
+                <div style={{ textAlign: 'center', marginBottom: '25px' }}>
+                    <Validation.components.ValidatedFormGroup for="useExternal">
+                        <Validation.components.ValidatedCheckbox
+                            name="useExternal"
+                            onChange={this.handleUseExternalChange}
+                            checked={this.state.useExternal}
+                            title="Use LuxTrust validation"
                         />
-                    </div>
-                    <div>
-                        <Validation.components.ValidationMessage for="name" />
-                    </div>
-                </Validation.components.ValidatedFormGroup>
-                <Validation.components.ValidatedFormGroup
-                    for="email"
-                    disabled={this.state.useExternal}
-                >
-                    <div>
-                        <Label disabled={this.state.useExternal}>Email</Label>
-                    </div>
-                    <div>
-                        <Validation.components.ValidatedControl
-                            disabled={this.state.useExternal}
-                            type="email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.handleEmailChange as any}
-                            placeholder="your_email@mail.com"
-                            validators={
-                                this.state.useExternal
-                                    ? []
-                                    : [Validation.validators.required]
-                            }
-                        />
-                    </div>
-                    <div>
-                        <Validation.components.ValidationMessage for="email" />
-                    </div>
-                </Validation.components.ValidatedFormGroup>
+                    </Validation.components.ValidatedFormGroup>
+                </div>
+
+                {!this.state.useExternal && (
+                    <>
+                        <Validation.components.ValidatedFormGroup for="name">
+                            <div>
+                                <Label>Name</Label>
+                            </div>
+                            <div>
+                                <Validation.components.ValidatedControl
+                                    type="text"
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.handleNameChange as any}
+                                    placeholder="Name Surname"
+                                    validators={[
+                                        Validation.validators.required
+                                    ]}
+                                />
+                            </div>
+                            <div>
+                                <Validation.components.ValidationMessage for="name" />
+                            </div>
+                        </Validation.components.ValidatedFormGroup>
+                        <Validation.components.ValidatedFormGroup for="email">
+                            <div>
+                                <Label>Email</Label>
+                            </div>
+                            <div>
+                                <Validation.components.ValidatedControl
+                                    type="email"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.handleEmailChange as any}
+                                    placeholder="your_email@mail.com"
+                                    validators={[
+                                        Validation.validators.required
+                                    ]}
+                                />
+                            </div>
+                            <div>
+                                <Validation.components.ValidationMessage for="email" />
+                            </div>
+                        </Validation.components.ValidatedFormGroup>
+                    </>
+                )}
+
                 <Validation.components.ValidatedFormGroup for="password">
                     <div>
                         <Label>Password</Label>
@@ -204,17 +208,6 @@ class AccountForm extends React.Component<Props, State> {
                         <Validation.components.ValidationMessage for="passwordConfirmation" />
                     </div>
                 </Validation.components.ValidatedFormGroup>
-
-                <div style={{ textAlign: 'center', marginBottom: '25px' }}>
-                    <Validation.components.ValidatedFormGroup for="useExternal">
-                        <Validation.components.ValidatedCheckbox
-                            name="useExternal"
-                            onChange={this.handleUseExternalChange}
-                            checked={this.state.useExternal}
-                            title="Use LuxTrust validation"
-                        />
-                    </Validation.components.ValidatedFormGroup>
-                </div>
 
                 <Button disabled={!this.isFilled()} type="submit" block>
                     Continue
