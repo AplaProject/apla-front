@@ -16,6 +16,7 @@ import themed from 'components/Theme/themed';
 
 export default themed.p`
     font-size: 14px;
-    padding: 0 15px;
-    color: ${props => props.theme.dropdownMenuPrimary};
+    padding: 15px 20px;
+    color: #818181;
+    margin: 0;
 `;

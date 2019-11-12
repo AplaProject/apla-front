@@ -32,24 +32,6 @@ const StyledUserMenu = themed.div`
     position: relative;
     vertical-align: middle;
 
-    &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        background: linear-gradient(#5e5e5e, #444444);
-        opacity: 0;
-        transition: opacity .15s ease-in-out;
-        border-radius: 20px;
-        z-index: 0;
-    }
-
-    &:hover:before {
-        opacity: 1;
-    }
-
     > .user-info {
         color: #fff;
         font-weight: 500;

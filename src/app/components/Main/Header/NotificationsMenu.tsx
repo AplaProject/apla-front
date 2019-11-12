@@ -33,7 +33,7 @@ const NotificationsMenu: React.SFC<Props> = props => (
         badge={props.count}
         warning={props.offline}
         align="right"
-        menuWidth={250}
+        menuWidth={320}
         content={
             <div style={{ overflow: 'hidden' }}>
                 <Heading>

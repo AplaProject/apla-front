@@ -41,6 +41,7 @@ const StyledHeaderButton = themed(DropdownButton)`
     font-size: 22px;
     border-radius: 20px;
     margin-left: 20px;
+    position: relative;
     
     &._warning {
         background: ${props => props.theme.menubarBackgroundSecondary};
@@ -66,6 +67,29 @@ const StyledHeaderButton = themed(DropdownButton)`
         font-style: normal;
         border-radius: 8px;
     }
+
+    .dropdown__content {
+        position: relative;
+        z-index: 2;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: linear-gradient(#5e5e5e, #444444);
+        opacity: 0;
+        transition: opacity .15s ease-in-out;
+        border-radius: 20px;
+        z-index: 0;
+    }
+
+    &:hover:before {
+        opacity: 1;
+    }
 `;
 
 const HeaderButton: React.SFC<Props> = props => (
@@ -80,12 +104,14 @@ const HeaderButton: React.SFC<Props> = props => (
         menuWidth={props.menuWidth}
         onClick={props.onClick}
     >
-        {props.children}
-        {props.badge ? (
-            <em className="dropdown__badge">
-                {props.badge > 9 ? '*' : props.badge}
-            </em>
-        ) : null}
+        <div className="dropdown__content">
+            {props.children}
+            {props.badge ? (
+                <em className="dropdown__badge">
+                    {props.badge > 9 ? '*' : props.badge}
+                </em>
+            ) : null}
+        </div>
     </StyledHeaderButton>
 );
 

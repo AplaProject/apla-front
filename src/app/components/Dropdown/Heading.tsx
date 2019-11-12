@@ -15,15 +15,10 @@
 import themed from 'components/Theme/themed';
 
 export default themed.div`
-    border-top: solid 1px ${props => props.theme.dropdownMenuSeparator};
-    height: 30px;
-    line-height: 30px;
-    padding: 0 12px;
-    font-size: 11px;
-    text-transform: uppercase;
-    color: ${props => props.theme.dropdownMenuSecondary};
-
-    &:first-child {
-        border-top: none;
-    }
+    font-size: 14px;
+    text-align: center;
+    padding: 7px 0 13px;
+    font-weight: 500;
+    color: #2b2b2b;
+    border-bottom: solid 1px #e4e4e4;
 `;
