@@ -52,6 +52,7 @@ import BackupModal from 'containers/Modal/BackupModal';
 import AuthSecurityProcessModal from 'containers/Modal/SecurityProcessModal';
 import AuthAccountRemove from 'containers/Modal/AccountRemoveModal';
 import SignPdfModal from 'containers/Modal/SignPdfModal';
+import AuthLogoutModal from 'containers/Modal/AuthLogoutModal';
 
 const MODAL_COMPONENTS = {
     AUTHORIZE: AuthorizeModal,
@@ -62,6 +63,7 @@ const MODAL_COMPONENTS = {
     AUTH_SECURITY_PROCESS: AuthSecurityProcessModal,
     AUTH_ACCOUNT_CREATED: AuthAccountCreated,
     AUTH_ACCOUNT_REMOVE: AuthAccountRemove,
+    AUTH_LOGOUT: AuthLogoutModal,
     COPY_WALLET: CopyWalletModal,
     TX_CONFIRM: TxConfirmModal,
     TX_ERROR: TxErrorModal,

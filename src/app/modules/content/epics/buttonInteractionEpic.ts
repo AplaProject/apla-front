@@ -107,6 +107,13 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                 else if ('@password' === action.payload.page.name) {
                     return Observable.of(changePassword.started(null));
                 }
+                else if ('@logout' === action.payload.page.name) {
+                    return Observable.of(modalShow({
+                        id: 'LOGOUT',
+                        type: 'AUTH_LOGOUT',
+                        params: {}
+                    }));
+                }
                 else if ('SIGN_PDF' === action.payload.page.name) {
                     return Observable.of(signPdf({
                         name: action.payload.page.params.Name,
