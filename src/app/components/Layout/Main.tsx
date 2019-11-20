@@ -55,7 +55,7 @@ export default themed(Main)`
         align-self: flex-start;
         grid-area: content;
         z-index: 1;
-        padding: 0 20px;
+        padding: 20px 20px 0 20px;
         overflow-x: hidden;
     }
 
