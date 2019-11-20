@@ -19,8 +19,8 @@ const tabs = [
     {
         title: 'Meetings',
         icon: 'fa fa-users',
-        page: 'shareholder_directors',
-        url: '/browse/home/shareholder_directors'
+        page: 'default_page',
+        url: '/browse/home/default_page'
     },
     {
         title: 'Notifications',
@@ -29,12 +29,12 @@ const tabs = [
         page: 'notifications',
         url: '/browse/home/notifications'
     },
-    {
-        title: 'Search',
-        icon: 'fa fa-search',
-        page: '',
-        url: ''
-    },
+    // {
+    //     title: 'Search',
+    //     icon: 'fa fa-search',
+    //     page: '',
+    //     url: ''
+    // },
     {
         title: 'Profile',
         icon: 'fa fa-user',
@@ -49,7 +49,10 @@ interface Props {
 
 const MainTabs: React.SFC<Props> = props => (
     <Tabs
-        activeIndex={Math.max(tabs.findIndex(l => l.page === props.page), 0)}
+        activeIndex={Math.max(
+            tabs.findIndex(l => l.page === props.page),
+            0
+        )}
         items={tabs}
     />
 );
