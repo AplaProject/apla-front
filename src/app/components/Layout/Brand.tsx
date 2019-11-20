@@ -42,10 +42,12 @@ export default themed(Brand)`
 
     & .brand__logo {
         grid-area: logo;
+        z-index: 1;
     }
 
     & .brand__content {
         grid-area: content;
+        z-index: 2;
     }
 
     @media (${media.lg}) {
