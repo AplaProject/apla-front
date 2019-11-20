@@ -38,6 +38,7 @@ export default themed(Header)`
     display: flex;
     flex-direction: row;
     justify-items: space-between;
+    padding: 0 15px;
 
     .header__logo {
         position: absolute;
@@ -47,6 +48,7 @@ export default themed(Header)`
         left: 0;
         background: url(/img/logoHeader.png) center center no-repeat;
         background-size: auto 26px;
+        z-index: 0;
     }
 
     .header__filler {
@@ -58,5 +60,7 @@ export default themed(Header)`
         flex-direction: row;
         align-items: center;
         padding: 0 10px;
+        position: relative;
+        z-index: 2;
     }
 `;
