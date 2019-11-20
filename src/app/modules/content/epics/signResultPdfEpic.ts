@@ -16,7 +16,6 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { signResultPdf } from 'modules/content/actions';
 import { modalShow } from 'modules/modal/actions';
-import queryString from 'query-string';
 
 const signResultPdfEpic: Epic = action$ =>
     action$.ofAction(signResultPdf).flatMap(action => {
@@ -24,14 +23,17 @@ const signResultPdfEpic: Epic = action$ =>
         const qaValues = qa.map(l => l.q + ':' + l.a).join(';');
 
         return Observable.from(
-            fetch(
-                'https://lt-relay.saurer.now.sh/api/relayResultPDF.js?' +
-                    queryString.stringify({
-                        ...relayParams,
-                        returnUrl: window.location.href,
-                        qa: qaValues
-                    })
-            )
+            fetch('https://apla-relay-lt.now.sh/api/relayResultPDF', {
+                method: 'POST',
+                body: JSON.stringify({
+                    ...relayParams,
+                    returnUrl: window.location.href,
+                    qa: qaValues
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
         )
             .flatMap(result => result.json())
             .map(data =>
