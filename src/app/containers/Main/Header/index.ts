@@ -41,7 +41,7 @@ const mapStateToProps = (
         return {};
     }
 
-    const link = crumbs[crumbs.length - 1];
+    const link = crumbs[crumbs.length - 2];
     return {
         returnUrl:
             crumbs.length === 2
