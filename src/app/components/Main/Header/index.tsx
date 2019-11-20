@@ -17,15 +17,18 @@ import React from 'react';
 import Header from 'components/Header';
 import NotificationsMenu from 'containers/Main/Header/NotificationsMenu';
 import UserMenu from 'containers/Main/Header/UserMenu';
+import BackButton from './BackButton';
 
 interface Props {
-    app?: string;
-    page?: string;
-    isAuthorized: boolean;
+    returnUrl?: string;
 }
 
 const MainHeader: React.SFC<Props> = props => (
-    <Header>
+    <Header
+        left={
+            <div>{props.returnUrl && <BackButton to={props.returnUrl} />}</div>
+        }
+    >
         <NotificationsMenu />
         <UserMenu />
     </Header>

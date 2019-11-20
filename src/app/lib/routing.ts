@@ -31,6 +31,11 @@ export const routes: RouteDict = {
     browse: {
         Header: MainHeader,
         Content: Navigator,
+        mapHeaderParams: params => ({
+            app: params.app,
+            section: params.page,
+            page: params.action
+        }),
         mapContentParams: params => ({
             app: params.app,
             section: params.page,
