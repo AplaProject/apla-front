@@ -23,16 +23,13 @@ const signResultPdfEpic: Epic = action$ =>
         const qaValues = qa.map(l => l.q + ':' + l.a).join(';');
 
         return Observable.from(
-            fetch('https://apla-relay-lt.now.sh/api/relayResultPDF', {
+            fetch('https://apla-relay-lt.now.sh/api/relayPDFVoting', {
                 method: 'POST',
-                body: JSON.stringify({
+                body: new URLSearchParams({
                     ...relayParams,
                     returnUrl: window.location.href,
                     qa: qaValues
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                } as any)
             })
         )
             .flatMap(result => result.json())

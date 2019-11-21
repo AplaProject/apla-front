@@ -25,12 +25,12 @@ const signPdfEpic: Epic = action$ =>
             : window.location.href;
 
         return Observable.from(
-            fetch('https://apla-relay-lt.now.sh/api/relayPDF', {
+            fetch('https://apla-relay-lt.now.sh/api/relayPDFProxy', {
                 method: 'POST',
-                body: JSON.stringify({
+                body: new URLSearchParams({
                     ...relayParams,
                     returnUrl
-                }),
+                } as any),
                 headers: {
                     'Content-Type': 'application/json'
                 }
