@@ -27,13 +27,10 @@ const signPdfEpic: Epic = action$ =>
         return Observable.from(
             fetch('https://apla-relay-lt.now.sh/api/relayPDFProxy', {
                 method: 'POST',
-                body: JSON.stringify({
+                body: new URLSearchParams({
                     ...relayParams,
                     returnUrl
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                } as any)
             })
         )
             .flatMap(result => result.json())
