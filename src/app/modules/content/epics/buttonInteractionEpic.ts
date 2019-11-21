@@ -116,15 +116,15 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                 }
                 else if ('SIGN_PDF' === action.payload.page.name) {
                     return Observable.of(signPdf({
-                        name: action.payload.page.params.Name,
-                        company: action.payload.page.params.Company,
-                        address: action.payload.page.params.Address,
-                        address2: action.payload.page.params.Address2,
-                        proxy: action.payload.page.params.Proxy,
-                        location: action.payload.page.params.Location,
+                        name: action.payload.page.params.Name || '',
+                        company: action.payload.page.params.Company || '',
+                        address: action.payload.page.params.Address || '',
+                        address2: action.payload.page.params.Address2 || '',
+                        proxy: action.payload.page.params.Proxy || '',
+                        location: action.payload.page.params.Location || '',
                         date: `${dd}/${mm}/${yyyy}`,
-                        signature: action.payload.page.params.Signature,
-                        meetingID: action.payload.page.params.MeetingID,
+                        signature: action.payload.page.params.Signature || '',
+                        meetingID: action.payload.page.params.MeetingID || '',
                         account: store.getState().auth.wallet.wallet.address,
                         redirect: action.payload.page.params.Page && routerService.generateRoute(`/browse/${action.payload.page.section}/${action.payload.page.params.Page}`)
                     }));
@@ -150,15 +150,15 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                     }
 
                     return Observable.of(signResultPdf({
-                        name: action.payload.page.params.Name,
-                        company: action.payload.page.params.Company,
-                        address: action.payload.page.params.Address,
-                        address2: action.payload.page.params.Address2,
+                        name: action.payload.page.params.Name || '',
+                        company: action.payload.page.params.Company || '',
+                        address: action.payload.page.params.Address || '',
+                        address2: action.payload.page.params.Address2 || '',
                         date: `${dd}/${mm}/${yyyy}`,
                         qa: qa.sort((a, b) => a.index - b.index),
-                        location: action.payload.page.params.Location,
-                        signature: action.payload.page.params.Signature,
-                        meetingID: action.payload.page.params.MeetingID,
+                        location: action.payload.page.params.Location || '',
+                        signature: action.payload.page.params.Signature || '' ,
+                        meetingID: action.payload.page.params.MeetingID || '',
                         account: store.getState().auth.wallet.wallet.address
                     }));
                 }
