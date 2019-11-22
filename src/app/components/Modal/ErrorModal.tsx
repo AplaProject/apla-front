@@ -12,32 +12,39 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Button from 'components/Form/Button';
 
 import Modal from './';
+import ModalWindow from 'containers/Modal/ModalWindow';
 
 export interface IErrorModalProps {
     value: string;
 }
 
 class ErrorModal extends Modal<IErrorModalProps, void> {
+    public static className = ' ';
+
     render() {
         return (
-            <div>
-                <Modal.Header>
+            <ModalWindow
+                title={
                     <FormattedMessage id="alert.error" defaultMessage="Error" />
-                </Modal.Header>
-                <Modal.Body>
-                    <div>{this.props.params.value}</div>
-                </Modal.Body>
-                <Modal.Footer className="text-right">
-                    <Button type="button" bsStyle="primary" onClick={this.props.onCancel.bind(this)}>
-                        <FormattedMessage id="close" defaultMessage="Close" />
+                }
+                width={400}
+                controls={
+                    <Button
+                        block
+                        color="link"
+                        onClick={() => this.props.onResult(null)}
+                    >
+                        Close
                     </Button>
-                </Modal.Footer>
-            </div>
+                }
+            >
+                <div>{this.props.params.value}</div>
+            </ModalWindow>
         );
     }
 }

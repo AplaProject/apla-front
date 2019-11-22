@@ -25,11 +25,11 @@ import { createEditorTab, loadEditorTab } from 'modules/editor/actions';
 import { backupAccount, changePassword } from 'modules/auth/actions';
 import { ITransaction } from 'apla/tx';
 import txReport from 'services/upload/txReport';
-import { sendAttachment } from 'lib/fs';
 
 const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => action$.ofAction(buttonInteraction)
     // Show confirmation window if there is any
     .flatMap(rootAction => {
+
         return Observable.if(
             () => !!rootAction.payload.confirm,
             Observable.merge(
@@ -126,8 +126,8 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                                         columns: ['hash']
                                     })).map(row => row.value.hash as string)
                                 )
-                            ).toArray().flatMap(attachments => {
-                                return Observable.from(txReport({
+                            ).toArray().flatMap(attachments =>
+                                Observable.from(txReport({
                                     meetingID: params.meetingID,
                                     agenda: params.agenda,
                                     company: params.company,
@@ -146,11 +146,22 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                                     params: JSON.stringify(firstTx.body.Params),
                                     blockTime: blockDetails.time,
                                     attachments
-                                })).flatMap(reportResult => {
-                                    sendAttachment(`${state.auth.wallet.wallet.address}_${params.meetingID}_${params.agenda}.pdf`, reportResult, 'application/pdf');
+                                })).flatMap(_reportResult => {
+                                    if (!_reportResult.success) {
+                                        return Observable.throw(_reportResult);
+                                    }
+
                                     return Observable.of(action);
-                                });
-                            })
+                                })
+                            )
+                        ).catch(_e => 
+                            Observable.of(modalShow({
+                                id: 'UPLOAD_ERROR',
+                                type: 'ERROR',
+                                params: {
+                                    value: 'Unable to upload file to the server'
+                                }
+                            }))
                         );
                 }
 

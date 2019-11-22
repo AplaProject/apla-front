@@ -35,7 +35,16 @@ interface Data {
     attachments: string[];
 }
 
-export default async function(data: Data) {
+type Response =
+    | {
+          success: true;
+          key: string;
+      }
+    | {
+          success: false;
+      };
+
+export default async function(data: Data): Promise<Response> {
     const [date, time] = new Date().toISOString().split('T');
     const [blockDate, blockTime] = new Date(data.blockTime * 3000)
         .toISOString()
@@ -68,5 +77,5 @@ export default async function(data: Data) {
             } as any)
         }
     );
-    return await response.arrayBuffer();
+    return await response.json();
 }
