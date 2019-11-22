@@ -17,23 +17,26 @@ import * as _ from 'lodash';
 
 import StyledComponent from './StyledComponent';
 import Validation from 'components/Validation';
-import { Validator, IValidatorGenerator } from 'components/Validation/Validators';
+import {
+    Validator,
+    IValidatorGenerator
+} from 'components/Validation/Validators';
 
 export interface IInputProps {
-    'className'?: string;
-    'class'?: string;
-    'disabled'?: string;
-    'name'?: string;
-    'placeholder'?: string;
-    'type'?: string;
-    'value'?: string;
-    'validate'?: {
-        [validator: string]: string
+    className?: string;
+    class?: string;
+    disabled?: string;
+    name?: string;
+    placeholder?: string;
+    type?: string;
+    value?: string;
+    validate?: {
+        [validator: string]: string;
     };
 }
 
 // TODO: type is not handled correctly
-const Input: React.SFC<IInputProps> = (props) => {
+const Input: React.SFC<IInputProps> = props => {
     const compiledValidators: Validator[] = [];
     const className = [props.class, props.className].join(' ');
     _.forEach(props.validate, (value, name) => {
@@ -41,8 +44,7 @@ const Input: React.SFC<IInputProps> = (props) => {
         if (validator) {
             if (validator instanceof Validator) {
                 compiledValidators.push(validator);
-            }
-            else {
+            } else {
                 const validatorGenerator: IValidatorGenerator = validator;
                 compiledValidators.push(validatorGenerator(value));
             }
@@ -50,6 +52,17 @@ const Input: React.SFC<IInputProps> = (props) => {
     });
 
     switch (props.type) {
+        case 'S3':
+            return (
+                <a
+                    className={className}
+                    href={`https://apla-bucket0.s3.eu-central-1.amazonaws.com/${props.value}`}
+                    rel="noopener noreferrer"
+                >
+                    {props.placeholder || props.value}
+                </a>
+            );
+
         case 'file':
             return (
                 <Validation.components.ValidatedFile
