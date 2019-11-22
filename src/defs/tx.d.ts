@@ -25,7 +25,7 @@ declare module 'apla/tx' {
         'E_SERVER';
 
     interface ITxResult {
-        block: string;
+        blockid: string;
         result: string;
     }
 

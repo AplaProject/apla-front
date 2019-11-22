@@ -23,8 +23,11 @@ import { push } from 'connected-react-router';
 import { renderPage } from 'modules/sections/actions';
 import { createEditorTab, loadEditorTab } from 'modules/editor/actions';
 import { backupAccount, changePassword } from 'modules/auth/actions';
+import { ITransaction } from 'apla/tx';
+import txReport from 'services/upload/txReport';
+import { sendAttachment } from 'lib/fs';
 
-const buttonInteractionEpic: Epic = (action$, store, { routerService }) => action$.ofAction(buttonInteraction)
+const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => action$.ofAction(buttonInteraction)
     // Show confirmation window if there is any
     .flatMap(rootAction => {
         return Observable.if(
@@ -75,7 +78,8 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                                 ...action,
                                 meta: {
                                     ...action.meta,
-                                    txHashes: result.payload.result.map(l => l.hash)
+                                    txHashes: result.payload.result.map(l => l.hash),
+                                    results: result.payload.result
                                 }
                             });
                         }
@@ -93,7 +97,61 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
             if (isType(action, buttonInteraction) && action.payload.page) {
                 const params = action.payload.page.params;
                 if ('txinfo' === action.payload.page.name) {
-                    params.txhashes = ((action.meta || {}).txHashes || []).join(',');
+                    const results: ITransaction[] = ((action.meta || {}).results || []);
+                    const firstTx = results[0];
+
+                    if (!firstTx || !firstTx.status.blockid) {
+                        return Observable.empty<never>();
+                    }
+
+                    const state = store.getState();
+                    const network = state.storage.networks.find(l => l.uuid === state.auth.session.network.uuid);
+                    const client = api({
+                        apiHost: state.auth.session.network.apiHost,
+                        sessionToken: state.auth.session.sessionToken
+                    });
+
+                    return Observable.from(client.getBlockDetails({ block_id: firstTx.status.blockid }))
+                        .flatMap(blockDetails => 
+                            Observable.from(client.getRow({
+                                id: params.meetingID,
+                                table: 'meetings_list',
+                                columns: ['agenda']
+
+                            })).flatMap(agenda => 
+                                Observable.from(JSON.parse(agenda.value.documents || '[]') as number[]).flatMap(documentID =>
+                                    Observable.from(client.getRow({
+                                        id: String(documentID),
+                                        table: 'binary',
+                                        columns: ['hash']
+                                    })).map(row => row.value.hash as string)
+                                )
+                            ).toArray().flatMap(attachments => {
+                                return Observable.from(txReport({
+                                    meetingID: params.meetingID,
+                                    agenda: params.agenda,
+                                    company: params.company,
+                                    category: params.category,
+                                    title: params.title,
+                                    duration: params.duration,
+                                    question: params.question,
+                                    decision: params.decision,
+                                    comments: params.comments,
+                                    proxy: params.proxy,
+        
+                                    networkID: network.id,
+                                    account: state.auth.wallet.wallet.address,
+                                    hash: firstTx.hash,
+                                    blockID: firstTx.status.blockid,
+                                    params: JSON.stringify(firstTx.body.Params),
+                                    blockTime: blockDetails.time,
+                                    attachments
+                                })).flatMap(reportResult => {
+                                    sendAttachment(`${state.auth.wallet.wallet.address}_${params.meetingID}_${params.agenda}.pdf`, reportResult, 'application/pdf');
+                                    return Observable.of(action);
+                                });
+                            })
+                        );
                 }
 
                 const date = new Date();

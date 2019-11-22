@@ -319,6 +319,14 @@ class AplaAPI {
     public txStatus = <T>(params: TTxStatusRequest<T>) => this._txStatus({
         hashes: Object.keys(params).map(l => params[l])
     }) as Promise<TTxStatusResponse<T>>
+    public getBlockDetails = this.setEndpoint<{ block_id: string }, { hash: string, time: number; }>('get', 'detailed_blocks', {
+        requestTransformer: request => ({
+            ...request,
+            count: 1
+        }),
+        responseTransformer: (response, _text, request) => 
+            response[request.block_id]
+    });
 }
 
 export default AplaAPI;

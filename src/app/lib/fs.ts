@@ -12,7 +12,7 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-export const sendAttachment = (filename: string, data: string, mime = 'text/plain') => {
+export const sendAttachment = (filename: string, data: string | ArrayBuffer, mime = 'text/plain') => {
     const blob = new Blob([data], { type: `${mime};charset=utf-8;` });
     if (navigator.msSaveBlob) {
         navigator.msSaveBlob(blob, filename);
