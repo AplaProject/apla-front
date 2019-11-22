@@ -34,6 +34,7 @@ const Tabs: React.SFC<Props> = props => (
                 key={index}
                 active={props.activeIndex === index}
                 icon={item.icon}
+                badge={item.badge}
                 url={item.url}
             >
                 {item.title}

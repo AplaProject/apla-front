@@ -15,46 +15,49 @@
 import React from 'react';
 import Tabs from 'components/Tabs';
 
-const tabs = [
-    {
-        title: 'Meetings',
-        icon: 'fa fa-users',
-        page: 'default_page',
-        url: '/browse/home/default_page'
-    },
-    {
-        title: 'Notifications',
-        badge: 9,
-        icon: 'fa fa-bell',
-        page: 'notifications',
-        url: '/browse/home/notifications'
-    },
-    // {
-    //     title: 'Search',
-    //     icon: 'fa fa-search',
-    //     page: '',
-    //     url: ''
-    // },
-    {
-        title: 'Profile',
-        icon: 'fa fa-user',
-        page: 'shareholder_profile',
-        url: '/browse/home/shareholder_profile'
-    }
-];
-
 interface Props {
     page: string;
+    notifications: number;
 }
 
-const MainTabs: React.SFC<Props> = props => (
-    <Tabs
-        activeIndex={Math.max(
-            tabs.findIndex(l => l.page === props.page),
-            0
-        )}
-        items={tabs}
-    />
-);
+const MainTabs: React.SFC<Props> = props => {
+    const tabs = [
+        {
+            title: 'Meetings',
+            icon: 'fa fa-users',
+            page: 'default_page',
+            url: '/browse/home/default_page'
+        },
+        {
+            title: 'Notifications',
+            badge: props.notifications,
+            icon: 'fa fa-bell',
+            page: 'notifications',
+            url: '/browse/home/notifications'
+        },
+        // {
+        //     title: 'Search',
+        //     icon: 'fa fa-search',
+        //     page: '',
+        //     url: ''
+        // },
+        {
+            title: 'Profile',
+            icon: 'fa fa-user',
+            page: 'shareholder_profile',
+            url: '/browse/home/shareholder_profile'
+        }
+    ];
+
+    return (
+        <Tabs
+            activeIndex={Math.max(
+                tabs.findIndex(l => l.page === props.page),
+                0
+            )}
+            items={tabs}
+        />
+    );
+};
 
 export default MainTabs;

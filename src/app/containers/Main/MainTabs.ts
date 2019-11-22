@@ -14,15 +14,21 @@
 
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
+import findNotificationsCount from 'modules/socket/util/findNotificationsCount';
 
 import MainTabs from 'components/Main/MainTabs';
 
 const mapStateToProps = (state: IRootState) => {
     const section = state.sections.sections[state.sections.mainSection];
+    const notifications = findNotificationsCount(
+        state.socket,
+        state.auth.wallet
+    );
 
     if (!section) {
         return {
-            page: ''
+            page: '',
+            notifications
         };
     }
 
@@ -30,18 +36,17 @@ const mapStateToProps = (state: IRootState) => {
 
     if (!page) {
         return {
-            page: ''
+            page: '',
+            notifications
         };
     }
 
     return {
-        page: page.name
+        page: page.name,
+        notifications
     };
 };
 
 const mapDispatchToProps = {};
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MainTabs);
+export default connect(mapStateToProps, mapDispatchToProps)(MainTabs);

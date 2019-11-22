@@ -20,6 +20,7 @@ interface Props {
     className?: string;
     active?: boolean;
     icon: string;
+    badge?: number;
     onClick?: () => void;
 }
 
@@ -33,6 +34,11 @@ const TabsButton: React.SFC<Props> = props => (
             <div className="tabs-button__icon">
                 <em className={props.icon} />
             </div>
+            {props.badge ? (
+                <div className="tabs-button__badge">
+                    {props.badge > 9 ? '*' : props.badge}
+                </div>
+            ) : null}
             <div className="tabs-button__title">{props.children}</div>
         </button>
     </li>
@@ -59,6 +65,7 @@ export default themed(TabsButton)`
         box-sizing: border-box;
         border-radius: 0;
         height: 100%;
+        position: relative;
 
         > .tabs-button__icon {
             font-size: 23px;
@@ -67,6 +74,21 @@ export default themed(TabsButton)`
 
         > .tabs-button__title {
             font-size: 12px;
+        }
+
+        > .tabs-button__badge {
+            background: #f94b7b;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            border-radius: 8px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: 3px;
+            margin-top: -23px;
+            text-align: center;
+            line-height: 16px;
         }
     }
 `;
