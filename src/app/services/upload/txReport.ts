@@ -50,7 +50,7 @@ export default async function(data: Data): Promise<Response> {
         .toISOString()
         .split('T');
     const response = await fetch(
-        'https://apla-relay-lt-git-feature-reportpdf.saurer.now.sh/api/relayPDFTx',
+        'https://apla-relay-lt.now.sh/api/relayPDFTx',
         {
             method: 'POST',
             body: new URLSearchParams({
