@@ -58,6 +58,7 @@ const Input: React.SFC<IInputProps> = props => {
                     className={className}
                     href={`https://apla-bucket0.s3.eu-central-1.amazonaws.com/${props.value}`}
                     rel="noopener noreferrer"
+                    target="_blank"
                 >
                     {props.placeholder || props.value}
                 </a>
