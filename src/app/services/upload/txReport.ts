@@ -37,7 +37,7 @@ interface Data {
 
 export default async function(data: Data) {
     const [date, time] = new Date().toISOString().split('T');
-    const [blockDate, blockTime] = new Date(data.blockTime)
+    const [blockDate, blockTime] = new Date(data.blockTime * 3000)
         .toISOString()
         .split('T');
     const response = await fetch(
