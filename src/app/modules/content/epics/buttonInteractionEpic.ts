@@ -20,7 +20,7 @@ import { isType } from 'typescript-fsa';
 import { txCall, txExec } from 'modules/tx/actions';
 import { modalShow, modalClose } from 'modules/modal/actions';
 import { push } from 'connected-react-router';
-import { renderPage } from 'modules/sections/actions';
+import { renderPage, reloadPage } from 'modules/sections/actions';
 import { createEditorTab, loadEditorTab } from 'modules/editor/actions';
 import { backupAccount, changePassword } from 'modules/auth/actions';
 import { ITransaction } from 'apla/tx';
@@ -151,7 +151,9 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                                         return Observable.throw(_reportResult);
                                     }
 
-                                    return Observable.of(action);
+                                    return Observable.of(reloadPage({
+                                        section: action.payload.page.section
+                                    }));
                                 })
                             )
                         ).catch(_e => 
