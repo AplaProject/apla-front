@@ -17,7 +17,6 @@ import React from 'react';
 import Modal from '../';
 import ModalWindow from 'containers/Modal/ModalWindow';
 import Button from 'components/Form/Button';
-import Card from 'components/Card';
 
 interface Params {
     name: string;
@@ -39,12 +38,6 @@ class AuthAccountCreated extends Modal<Params, void> {
                 }
             >
                 <div>Your account has been successfully created</div>
-                <div style={{ marginTop: '20px' }}>
-                    <Card
-                        name={this.props.params.name}
-                        account={this.props.params.account}
-                    />
-                </div>
             </ModalWindow>
         );
     }

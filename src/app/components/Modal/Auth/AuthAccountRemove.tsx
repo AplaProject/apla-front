@@ -18,7 +18,6 @@ import { IWallet } from 'apla/auth';
 import Modal from '../';
 import ModalWindow from 'containers/Modal/ModalWindow';
 import Button from 'components/Button/Button';
-import Card from 'components/Card';
 import { IAccount } from 'apla/api';
 
 interface Params {
@@ -49,16 +48,6 @@ class AuthAccountRemove extends Modal<Params, void> {
                 <div>
                     This action is *IRREVERSIBLE* unless you have a backup of
                     your private key
-                </div>
-                <div style={{ marginTop: '20px' }}>
-                    <Card
-                        name={this.props.params.name}
-                        account={
-                            'address' in this.props.params.wallet
-                                ? this.props.params.wallet.address
-                                : '0000-0000-0000-0000-0000'
-                        }
-                    />
                 </div>
             </ModalWindow>
         );
