@@ -119,10 +119,10 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                                 columns: ['agenda']
 
                             })).flatMap(agenda => 
-                                Observable.from(JSON.parse(agenda.value.documents || '[]') as number[]).flatMap(documentID =>
+                                Observable.from((JSON.parse((JSON.parse(agenda.value.agenda)[params.agenda]).documents) || []) as number[]).flatMap(documentID =>
                                     Observable.from(client.getRow({
                                         id: String(documentID),
-                                        table: 'binary',
+                                        table: 'binaries',
                                         columns: ['hash']
                                     })).map(row => row.value.hash as string)
                                 )
