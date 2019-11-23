@@ -16,10 +16,11 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import themed from 'components/Theme/themed';
-import LinkButton from 'components/Form/LinkButton';
+import Button from 'components/Form/Button';
 
 interface Props {
     className?: string;
+    onRegister: () => void;
 }
 
 const Welcome: React.SFC<Props> = props => (
@@ -31,9 +32,9 @@ const Welcome: React.SFC<Props> = props => (
         </div>
 
         <div className="welcome__block">
-            <LinkButton to="/signup" className="welcome__button">
+            <Button onClick={props.onRegister} className="welcome__button">
                 Sign up
-            </LinkButton>
+            </Button>
         </div>
 
         <div className="welcome__block">

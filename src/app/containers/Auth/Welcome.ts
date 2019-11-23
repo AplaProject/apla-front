@@ -12,35 +12,21 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import React from 'react';
-import Authentication from 'containers/Auth/Authentication';
-import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import { IRootState } from 'modules';
+import { modalShow } from 'modules/modal/actions';
 
-interface Props {
-    location?: {
-        state?: {
-            accepted: boolean;
-        };
-    };
-}
+import Welcome from 'components/Auth/Welcome';
 
-const SignUp: React.SFC<Props> = props => {
-    if (
-        !props.location ||
-        !props.location.state ||
-        !props.location.state.accepted
-    ) {
-        return <Redirect to="/" />;
-    }
+const mapStateToProps = (state: IRootState) => ({});
 
-    return (
-        <Authentication
-            title="Create Account"
-            onReturn={undefined}
-            onProcess={undefined}
-            onProcessExternal={undefined}
-        />
-    );
+const mapDispatchToProps = {
+    onRegister: () =>
+        modalShow({
+            id: 'LEGAL',
+            type: 'LEGAL',
+            params: {}
+        })
 };
 
-export default SignUp;
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

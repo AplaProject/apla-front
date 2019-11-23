@@ -16,7 +16,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import Brand from 'components/Layout/Brand';
 import SignIn from 'containers/Auth/SignIn';
-import Welcome from './Welcome';
+import Welcome from 'containers/Auth/Welcome';
 import SignUp from './SignUp';
 import Recover from './Recover';
 

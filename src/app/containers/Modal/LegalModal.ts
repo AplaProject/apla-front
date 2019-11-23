@@ -12,35 +12,20 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import React from 'react';
-import Authentication from 'containers/Auth/Authentication';
-import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import { IModalProps } from 'components/Modal';
+import { push } from 'connected-react-router';
 
-interface Props {
-    location?: {
-        state?: {
-            accepted: boolean;
-        };
-    };
-}
+import LegalModal from 'components/Modal/LegalModal';
 
-const SignUp: React.SFC<Props> = props => {
-    if (
-        !props.location ||
-        !props.location.state ||
-        !props.location.state.accepted
-    ) {
-        return <Redirect to="/" />;
-    }
-
-    return (
-        <Authentication
-            title="Create Account"
-            onReturn={undefined}
-            onProcess={undefined}
-            onProcessExternal={undefined}
-        />
-    );
-};
-
-export default SignUp;
+export default connect(
+    null,
+    { push },
+    (_state, dispatch: any, props: IModalProps<void, void>) => ({
+        ...props,
+        onResult: (_data: void) => {
+            dispatch.push('/signup', { accepted: true });
+            props.onResult(null);
+        }
+    })
+)(LegalModal);
