@@ -89,7 +89,7 @@
         "build-desktop": "npm run build-css && cross-env PUBLIC_URL=./ REACT_APP_VERSION=$npm_package_version react-scripts-ts-electron build",
         "package": "electron-builder --config electron-builder.json --dir",
         "release": "electron-builder --config electron-builder.json",
-        "serve": "now ./build -A ../now.json -n apla2"
+        "serve": "now ./build -A ./now.json -n apla2"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.18",
