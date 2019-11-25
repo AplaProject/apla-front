@@ -49,6 +49,10 @@ export const signResultPdf = actionCreator<{
     signature: string;
     qa: { q: string, a: string }[];
 }>('SIGN_RESULT_PDF');
+export const signProtocol = actionCreator<{
+    binaryID: string;
+    meetingID: string;
+}>('SIGN_PROTOCOL');
 
 // Notifications
 export const fetchNotifications = actionCreator.async<void, TProtypoElement[], void>('FETCH_NOTIFICATIONS');

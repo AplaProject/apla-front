@@ -18,11 +18,13 @@ import fetchNotificationsEpic from './epics/fetchNotificationsEpic';
 import buttonInteractionEpic from './epics/buttonInteractionEpic';
 import signPdfEpic from './epics/signPdfEpic';
 import signResultPdfEpic from './epics/signResultPdfEpic';
+import signProtocolEpic from './epics/signProtocolEpic';
 
 export default combineEpics(
     displayDataEpic,
     fetchNotificationsEpic,
     buttonInteractionEpic,
     signPdfEpic,
-    signResultPdfEpic
+    signResultPdfEpic,
+    signProtocolEpic
 );

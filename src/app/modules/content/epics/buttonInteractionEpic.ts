@@ -15,7 +15,7 @@
 import { Action } from 'redux';
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
-import { buttonInteraction, signPdf, signResultPdf } from 'modules/content/actions';
+import { buttonInteraction, signPdf, signResultPdf, signProtocol } from 'modules/content/actions';
 import { isType } from 'typescript-fsa';
 import { txCall, txExec } from 'modules/tx/actions';
 import { modalShow, modalClose } from 'modules/modal/actions';
@@ -183,6 +183,12 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                         id: 'LOGOUT',
                         type: 'AUTH_LOGOUT',
                         params: {}
+                    }));
+                }
+                else if ('SIGN_PROTOCOL' === action.payload.page.name) {
+                    return Observable.of(signProtocol({
+                        binaryID: action.payload.page.params.BinaryID || '',
+                        meetingID: action.payload.page.params.MeetingID || ''
                     }));
                 }
                 else if ('SIGN_PDF' === action.payload.page.name) {
