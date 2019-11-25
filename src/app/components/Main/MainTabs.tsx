@@ -33,7 +33,7 @@ const MainTabs: React.SFC<Props> = props => {
             badge: props.notifications,
             icon: 'fa fa-bell',
             page: 'notifications',
-            url: '/browse/home/notifications'
+            url: '/browse/home/notifications_mobile'
         },
         // {
         //     title: 'Search',
