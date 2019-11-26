@@ -23,6 +23,7 @@ const loginAccountDoneHandler: Reducer<typeof loginAccount.done, State> = (state
     wallet: payload.result.context,
     session: payload.result.session,
     privateKey: payload.result.privateKey,
+    memberName: payload.result.memberName,
     id: payload.result.context.wallet.id,
     isDefaultWallet: false
 });

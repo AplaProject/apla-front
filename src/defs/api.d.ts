@@ -147,6 +147,13 @@ declare module 'apla/api' {
         columns?: string[];
     }
 
+    interface IRowQueryRequest {
+        table: string;
+        column: string;
+        value: string;
+        columns?: string[];
+    }
+
     interface IRowResponse {
         id: string;
         value: {

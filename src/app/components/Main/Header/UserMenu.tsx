@@ -82,6 +82,7 @@ interface Props {
     isDefaultWallet: boolean;
     wallet?: IAccountContext;
     walletEcosystems: IEcosystemInfo[];
+    memberName: string;
     onSwitchEcosystem: (ecosystem: string, defaultRole?: boolean) => void;
     onLogout: () => void;
     onChangePassword: () => void;
@@ -122,7 +123,7 @@ const UserMenu: React.SFC<Props> = props =>
             }
         >
             <StyledUserMenu>
-                <div className="user-info">{props.wallet.wallet.address}</div>
+                <div className="user-info">{props.memberName}</div>
                 <Avatar
                     className="user-avatar"
                     size={36}

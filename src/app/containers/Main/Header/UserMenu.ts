@@ -21,6 +21,7 @@ import UserMenu from 'components/Main/Header/UserMenu';
 
 const mapStateToProps = (state: IRootState) => ({
     isDefaultWallet: state.auth.isDefaultWallet,
+    memberName: state.auth.memberName,
     wallet: state.auth.wallet,
     walletEcosystems: ((state.auth.wallet && state.auth.wallet.wallet && state.auth.wallets) ? (state.auth.wallets.find(l => l.id === state.auth.wallet.wallet.id) || { access: [] }).access : []).sort((a, b) => Number(a.ecosystem) - Number(b.ecosystem))
 });

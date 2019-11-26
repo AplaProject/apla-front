@@ -55,6 +55,7 @@ export type State = {
     readonly wallet: IAccountContext;
     readonly wallets: IAccount[];
     readonly privateKey: string;
+    readonly memberName: string;
     readonly newAccount?: {
         SAMLRequest: string;
         RelayState: string;
@@ -77,6 +78,7 @@ export const initialState: State = {
     defaultWallet: null,
     wallet: null,
     privateKey: null,
+    memberName: '',
     wallets: []
 };
 
