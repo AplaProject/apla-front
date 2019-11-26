@@ -16,6 +16,7 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { signProtocol } from 'modules/content/actions';
 import { modalShow } from 'modules/modal/actions';
+import uploadProtocol from 'services/upload/uploadProtocol';
 
 const signProtocolEpic: Epic = (action$, store, { api }) =>
     action$.ofAction(signProtocol).flatMap(action => {
@@ -34,24 +35,21 @@ const signProtocolEpic: Epic = (action$, store, { api }) =>
         )
             .map(row => row.value.hash as string)
             .flatMap(hash =>
-                fetch(
-                    'https://apla-relay-lt.saurer.now.sh/api/relayPDFProtocol?' +
-                        new URLSearchParams({
+                Observable.from(
+                    fetch(
+                        `${state.auth.session.network.apiHost}/api/v2/data/1_binaries/${action.payload.binaryID}/data/${hash}`
+                    )
+                )
+                    .flatMap(response => response.arrayBuffer())
+                    .flatMap(file =>
+                        uploadProtocol({
                             account: state.auth.wallet.wallet.address,
                             name: 'Minutes',
                             meetingID: action.payload.meetingID,
-                            returnUrl: location.href,
-                            link: `${state.auth.session.network.apiHost}/api/v2/data/1_binaries/${action.payload.binaryID}/data/${hash}`
-                        } as any).toString(),
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/octet-stream'
-                        }
-                    }
-                )
+                            file
+                        })
+                    )
             )
-            .flatMap(response => response.text())
             .map(data =>
                 modalShow({
                     id: 'SIGN_PDF',
@@ -63,11 +61,7 @@ const signProtocolEpic: Epic = (action$, store, { api }) =>
                     }
                 })
             )
-            .catch(e => {
-                // tslint:disable-next-line: no-console
-                console.error(e);
-                return Observable.empty<never>();
-            });
+            .catch(e => Observable.empty<never>());
     });
 
 export default signProtocolEpic;
