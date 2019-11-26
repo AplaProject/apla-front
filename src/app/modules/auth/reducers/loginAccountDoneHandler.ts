@@ -16,14 +16,16 @@ import { State } from '../reducer';
 import { loginAccount } from '../actions';
 import { Reducer } from 'modules';
 
-const loginAccountDoneHandler: Reducer<typeof loginAccount.done, State> = (state, payload) => ({
+const loginAccountDoneHandler: Reducer<typeof loginAccount.done, State> = (
+    state,
+    payload
+) => ({
     ...state,
     isAuthenticated: true,
     isLoggingIn: false,
     wallet: payload.result.context,
     session: payload.result.session,
     privateKey: payload.result.privateKey,
-    memberName: payload.result.memberName,
     id: payload.result.context.wallet.id,
     isDefaultWallet: false
 });

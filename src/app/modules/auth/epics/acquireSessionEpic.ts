@@ -26,8 +26,8 @@ enum RemoteSectionStatus {
     Main = '2'
 }
 
-const acquireSessionEpic: Epic = (action$, store, { api }) => action$.ofAction(acquireSession.started)
-    .flatMap(action => {
+const acquireSessionEpic: Epic = (action$, store, { api }) =>
+    action$.ofAction(acquireSession.started).flatMap(action => {
         const state = store.getState();
         const client = api({
             apiHost: action.payload.network.apiHost,
@@ -35,52 +35,87 @@ const acquireSessionEpic: Epic = (action$, store, { api }) => action$.ofAction(a
         });
 
         return Observable.forkJoin(
-            Observable.from(client.sections({ locale: state.storage.locale })).map(s => s.list),
-            Observable.from(client.getParam({ name: 'stylesheet' })).map(p => p.value).catch(e => Observable.of('')),
-            Observable.from(client.getParam({ name: 'print_stylesheet' })).map(p => p.value).catch(e => Observable.of(''))
-
-        ).flatMap(([sections, stylesheet, printStylesheet]) => {
-            const sectionsResult: { [name: string]: ISection } = {};
-            const mainSection = sections.find(l => RemoteSectionStatus.Main === l.status);
-
-            sections.forEach((section, index) => {
-                sectionsResult[section.urlname] = {
-                    index,
-                    name: section.urlname,
-                    title: section.title,
-                    defaultPage: section.page,
-                    breadcrumbs: [{
-                        caller: '',
-                        type: 'PAGE',
-                        title: section.title,
-                        section: section.urlname,
-                        page: section.page,
-                        params: {}
-                    }],
-                    menus: [],
-                    page: undefined
-                };
-            });
-
-            return Observable.of<Action>(
-                sectionsInit({
-                    mainSection: mainSection ? mainSection.urlname : sections[0].urlname,
-                    sections: sectionsResult
-                }),
-                ecosystemInit({
-                    stylesheet,
-                    printStylesheet
-                }),
-                fetchNotifications.started(undefined),
-                acquireSession.done({
-                    params: action.payload,
-                    result: true
+            Observable.from(
+                client.sections({ locale: state.storage.locale })
+            ).map(s => s.list),
+            Observable.from(client.getParam({ name: 'stylesheet' }))
+                .map(p => p.value)
+                .catch(e => Observable.of('')),
+            Observable.from(client.getParam({ name: 'print_stylesheet' }))
+                .map(p => p.value)
+                .catch(e => Observable.of('')),
+            Observable.from(
+                client.getRowQuery({
+                    table: 'members',
+                    columns: ['member_info'],
+                    column: 'account',
+                    value: state.auth.wallet.wallet.address
                 })
+            ).map(
+                memberInfo =>
+                    JSON.parse(memberInfo.value.member_info).personal_name ||
+                    state.auth.wallet.wallet.address
+            )
+        )
+            .flatMap(([sections, stylesheet, printStylesheet, memberName]) => {
+                const sectionsResult: { [name: string]: ISection } = {};
+                const mainSection = sections.find(
+                    l => RemoteSectionStatus.Main === l.status
+                );
+
+                sections.forEach((section, index) => {
+                    sectionsResult[section.urlname] = {
+                        index,
+                        name: section.urlname,
+                        title: section.title,
+                        defaultPage: section.page,
+                        breadcrumbs: [
+                            {
+                                caller: '',
+                                type: 'PAGE',
+                                title: section.title,
+                                section: section.urlname,
+                                page: section.page,
+                                params: {}
+                            }
+                        ],
+                        menus: [],
+                        page: undefined
+                    };
+                });
+
+                return Observable.of<Action>(
+                    sectionsInit({
+                        mainSection: mainSection
+                            ? mainSection.urlname
+                            : sections[0].urlname,
+                        sections: sectionsResult
+                    }),
+                    ecosystemInit({
+                        stylesheet,
+                        printStylesheet
+                    }),
+                    fetchNotifications.started(undefined),
+                    acquireSession.done({
+                        params: action.payload,
+                        result: {
+                            acquired: true,
+                            memberName
+                        }
+                    })
+                );
+            })
+            .catch(e =>
+                Observable.of(
+                    acquireSession.done({
+                        params: action.payload,
+                        result: {
+                            acquired: false,
+                            memberName: ''
+                        }
+                    })
+                )
             );
-        }).catch(e => Observable.of(acquireSession.done({
-            params: action.payload,
-            result: false
-        })));
     });
 
 export default acquireSessionEpic;

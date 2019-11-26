@@ -76,45 +76,27 @@ const loginAccountEpic: Epic = (action$, store, { api }) =>
                                 network: networkEndpoint
                             };
 
-                            const securedClient = client.authorize(
-                                response.token
-                            );
-
-                            return Observable.from(
-                                securedClient.getRowQuery({
-                                    table: 'members',
-                                    columns: ['member_info'],
-                                    column: 'account',
-                                    value: keyInfo.account
-                                })
-                            ).flatMap(memberInfo => {
-                                const memberName =
-                                    JSON.parse(memberInfo.value.member_info)
-                                        .personal_name || keyInfo.account;
-
-                                return Observable.of<Action>(
-                                    push('/'),
-                                    loginAccount.done({
-                                        params: action.payload,
-                                        result: {
-                                            session: sessionResult,
-                                            privateKey,
-                                            publicKey,
-                                            memberName,
-                                            context: {
-                                                wallet: {
-                                                    ...account,
-                                                    address: keyInfo.account,
-                                                    access: keyInfo.ecosystems
-                                                },
-                                                access: firstEcosystem,
-                                                role
-                                            }
+                            return Observable.of<Action>(
+                                push('/'),
+                                loginAccount.done({
+                                    params: action.payload,
+                                    result: {
+                                        session: sessionResult,
+                                        privateKey,
+                                        publicKey,
+                                        context: {
+                                            wallet: {
+                                                ...account,
+                                                address: keyInfo.account,
+                                                access: keyInfo.ecosystems
+                                            },
+                                            access: firstEcosystem,
+                                            role
                                         }
-                                    }),
-                                    acquireSession.started(sessionResult)
-                                );
-                            });
+                                    }
+                                }),
+                                acquireSession.started(sessionResult)
+                            );
                         })
                         // Catch actual login error, yield result
                         .catch(e =>

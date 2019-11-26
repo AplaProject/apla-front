@@ -16,10 +16,16 @@ import { State } from '../reducer';
 import { acquireSession } from '../actions';
 import { Reducer } from 'modules';
 
-const acquireSessionDoneHandler: Reducer<typeof acquireSession.done, State> = (state, payload): State => ({
+const acquireSessionDoneHandler: Reducer<typeof acquireSession.done, State> = (
+    state,
+    payload
+): State => ({
     ...state,
-    isAuthenticated: payload.result,
-    isAcquired: payload.result
+    isAuthenticated: payload.result.acquired,
+    isAcquired: payload.result.acquired,
+    memberName: payload.result.acquired
+        ? payload.result.memberName
+        : state.memberName
 });
 
 export default acquireSessionDoneHandler;
