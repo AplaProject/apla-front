@@ -60,7 +60,7 @@ export default async function(data: Data): Promise<Response> {
             body: new URLSearchParams({
                 networkID: data.networkID,
                 version: process.env.REACT_APP_VERSION || 'x.x.x',
-                reportID: `${senderAccount}_${data.meetingID}_${data.agenda}`,
+                reportID: `${senderAccount}_${data.meetingID}_${data.agenda}_${data.networkID}`,
                 account: data.account,
                 date,
                 time,
