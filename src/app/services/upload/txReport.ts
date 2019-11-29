@@ -46,7 +46,7 @@ type Response =
 
 export default async function(data: Data): Promise<Response> {
     const [date, time] = new Date().toISOString().split('T');
-    const [blockDate, blockTime] = new Date(data.blockTime * 3000)
+    const [blockDate, blockTime] = new Date(data.blockTime * 1000)
         .toISOString()
         .split('T');
     const response = await fetch(
