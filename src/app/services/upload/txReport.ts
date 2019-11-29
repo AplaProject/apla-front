@@ -49,6 +49,10 @@ export default async function(data: Data): Promise<Response> {
     const [blockDate, blockTime] = new Date(data.blockTime * 1000)
         .toISOString()
         .split('T');
+    const senderAccount =
+        !data.proxy || 24 !== data.proxy.trim().length
+            ? data.account
+            : data.proxy;
     const response = await fetch(
         'https://apla-relay-lt.now.sh/api/relayPDFTx',
         {
@@ -56,7 +60,7 @@ export default async function(data: Data): Promise<Response> {
             body: new URLSearchParams({
                 networkID: data.networkID,
                 version: process.env.REACT_APP_VERSION || 'x.x.x',
-                reportID: `${data.account}_${data.meetingID}_${data.agenda}`,
+                reportID: `${senderAccount}_${data.meetingID}_${data.agenda}`,
                 account: data.account,
                 date,
                 time,
