@@ -41,7 +41,7 @@ interface IToolButtonState {
 }
 
 interface IToolButtonDispatch {
-    buttonInteraction: typeof buttonInteraction;
+    buttonInteraction: typeof buttonInteraction.started;
 }
 
 class ToolButtonContainer extends React.Component<IToolButtonProps & IToolButtonState & IToolButtonDispatch> {
@@ -96,7 +96,7 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-    buttonInteraction
+    buttonInteraction: buttonInteraction.started
 };
 
 export default connect<IToolButtonState, IToolButtonDispatch, IToolButtonProps>(mapStateToProps, mapDispatchToProps)(ToolButtonContainer);

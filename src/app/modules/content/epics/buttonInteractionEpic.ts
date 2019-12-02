@@ -17,7 +17,7 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { buttonInteraction, signPdf, signResultPdf, signProtocol } from 'modules/content/actions';
 import { isType } from 'typescript-fsa';
-import { txCall, txExec } from 'modules/tx/actions';
+import { txCall, txExec, txAuthorize } from 'modules/tx/actions';
 import { modalShow, modalClose } from 'modules/modal/actions';
 import { push } from 'connected-react-router';
 import { renderPage, reloadPage } from 'modules/sections/actions';
@@ -26,7 +26,7 @@ import { backupAccount, changePassword } from 'modules/auth/actions';
 import { ITransaction } from 'apla/tx';
 import txReport from 'services/upload/txReport';
 
-const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => action$.ofAction(buttonInteraction)
+const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => action$.ofAction(buttonInteraction.started)
     // Show confirmation window if there is any
     .flatMap(rootAction => {
 
@@ -41,13 +41,13 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                 action$.ofAction(modalClose).take(1).flatMap(modalPayload => Observable.if(
                     () => 'RESULT' === modalPayload.payload.reason,
                     Observable.of(rootAction),
-                    Observable.empty<never>()
+                    Observable.throw('CANCEL')
                 ))
             ),
             Observable.of(rootAction)
 
         ).flatMap(action => {
-            if (isType(action, buttonInteraction) && action.payload.contracts.length) {
+            if (isType(action, buttonInteraction.started) && action.payload.contracts.length) {
                 if (store.getState().auth.isDefaultWallet) {
                     return Observable.of(modalShow({
                         id: 'TX_ERROR',
@@ -66,13 +66,14 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                         contracts: action.payload.contracts,
                         errorRedirects: action.payload.errorRedirects
                     })),
-                    action$.filter(l =>
-                        isType(l, txExec.done) || isType(l, txExec.failed)
-
-                    ).filter((l: ReturnType<typeof txExec.done> | ReturnType<typeof txExec.failed>) =>
-                        action.payload.uuid === l.payload.params.uuid
-
-                    ).take(1).flatMap(result => {
+                    action$.filter(l => {
+                        if (isType(l, txExec.done) || isType(l, txExec.failed)) {
+                            return l.payload.params.uuid === action.payload.uuid;
+                        } else {
+                            return isType(l, txAuthorize.failed);
+                        }
+                    })
+                    .take(1).flatMap((result: ReturnType<typeof txExec.done> | ReturnType<typeof txExec.failed> | ReturnType<typeof txAuthorize.failed>) => {
                         if (isType(result, txExec.done)) {
                             return Observable.of({
                                 ...action,
@@ -84,7 +85,7 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                             });
                         }
                         else {
-                            return Observable.empty<never>();
+                            return Observable.throw('CANCEL');
                         }
                     })
                 );
@@ -94,14 +95,14 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
             }
 
         }).flatMap(action => {
-            if (isType(action, buttonInteraction) && action.payload.page) {
+            if (isType(action, buttonInteraction.started) && action.payload.page) {
                 const params = action.payload.page.params;
                 if ('txinfo' === action.payload.page.name) {
                     const results: ITransaction[] = ((action.meta || {}).results || []);
                     const firstTx = results[0];
 
                     if (!firstTx || !firstTx.status.blockid) {
-                        return Observable.empty<never>();
+                        return Observable.throw('CANCEL');
                     }
 
                     const state = store.getState();
@@ -263,7 +264,7 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
             }
 
         }).flatMap(action => {
-            if (isType(action, buttonInteraction)) {
+            if (isType(action, buttonInteraction.started)) {
                 return Observable.from(action.payload.actions).flatMap(buttonAction => {
                     switch (buttonAction.name) {
                         case 'CREATE': return Observable.of(createEditorTab.started(buttonAction.params.Type));
@@ -281,14 +282,24 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                             account: store.getState().auth.wallet.wallet.address,
                             redirect: buttonAction.params.Page && routerService.generateRoute(`/browse/${action.payload.page.section}/${buttonAction.params.Page}`)
                         }));
-                        default: return Observable.empty<never>();
+                        default: return Observable.throw('CANCEL');
                     }
                 });
             }
             else {
                 return Observable.of(action);
             }
-        });
+        })
+        .finally(() => {
+            store.dispatch(buttonInteraction.done({
+                params: rootAction.payload,
+                result: null
+            }));
+        })
+        .catch(() => Observable.of(buttonInteraction.done({
+            params: rootAction.payload,
+            result: null
+        })));
     });
 
 export default buttonInteractionEpic;

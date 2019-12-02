@@ -22,7 +22,7 @@ export const ecosystemInit = actionCreator<{ stylesheet: string, printStylesheet
 export const setMenuActive = actionCreator<boolean>('SET_MENU_ACTIVE');
 
 // Interaction
-export const buttonInteraction = actionCreator<IButtonInteraction>('BUTTON_INTERACTION');
+export const buttonInteraction = actionCreator.async<IButtonInteraction, void>('BUTTON_INTERACTION');
 export const displayData = actionCreator.async<string, string, string>('DISPLAY_DATA');
 export const signPdf = actionCreator<{
     name: string;

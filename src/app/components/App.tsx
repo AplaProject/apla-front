@@ -32,6 +32,7 @@ import ThemeProvider from 'components/Theme/ThemeProvider';
 import Titlebar from 'components/Titlebar';
 // import Legal from 'components/Legal';
 import Main from './Main';
+import Preloader from 'containers/Preloader';
 // import Layout from './Layout';
 
 interface AppProps {
@@ -89,6 +90,7 @@ class App extends React.Component<AppProps> {
                             <Titlebar>{appTitle}</Titlebar>
                         </StyledTitlebar>
                         <ModalProvider />
+                        <Preloader />
                         <NotificationsProvider />
 
                         {/* {platform.select({

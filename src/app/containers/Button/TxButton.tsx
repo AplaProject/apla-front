@@ -76,7 +76,7 @@ interface ITxButtonState {
 }
 
 interface ITxButtonDispatch {
-    buttonInteraction: typeof buttonInteraction;
+    buttonInteraction: typeof buttonInteraction.started;
 }
 
 class TxButton extends React.Component<ITxButtonProps & ITxButtonState & ITxButtonDispatch> {
@@ -148,7 +148,7 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-    buttonInteraction
+    buttonInteraction: buttonInteraction.started
 };
 
 export default connect<ITxButtonState, ITxButtonDispatch, ITxButtonProps>(mapStateToProps, mapDispatchToProps)(TxButton);
