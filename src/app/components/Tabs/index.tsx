@@ -45,7 +45,6 @@ const Tabs: React.SFC<Props> = props => (
 
 export default themed(Tabs)`
     background: linear-gradient(#4a4a4a,#151515);
-    height: 60px;
     display: flex;
     flex-direction: row;
     padding: 0;

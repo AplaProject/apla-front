@@ -66,6 +66,7 @@ export default themed(TabsButton)`
         border-radius: 0;
         height: 100%;
         position: relative;
+        padding-bottom: env(safe-area-inset-bottom);
 
         > .tabs-button__icon {
             font-size: 23px;
@@ -74,6 +75,7 @@ export default themed(TabsButton)`
 
         > .tabs-button__title {
             font-size: 12px;
+            margin-bottom: 5px;
         }
 
         > .tabs-button__badge {
