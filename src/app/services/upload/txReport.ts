@@ -61,6 +61,7 @@ export default async function(data: Data): Promise<Response> {
                 networkID: data.networkID,
                 version: process.env.REACT_APP_VERSION || 'x.x.x',
                 reportID: `${senderAccount}_${data.meetingID}_${data.agenda}_${data.networkID}`,
+                senderAccount,
                 account: data.account,
                 date,
                 time,
