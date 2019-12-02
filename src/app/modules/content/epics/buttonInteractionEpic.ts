@@ -231,6 +231,8 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                         company: action.payload.page.params.Company || '',
                         address: action.payload.page.params.Address || '',
                         address2: action.payload.page.params.Address2 || '',
+                        meeting: action.payload.page.params.Meeting || '',
+                        meeting2: action.payload.page.params.Meeting2 || '',
                         date: `${dd}/${mm}/${yyyy}`,
                         qa: qa.sort((a, b) => a.index - b.index),
                         location: action.payload.page.params.Location || '',

@@ -41,6 +41,8 @@ export const signResultPdf = actionCreator<{
     name: string;
     account: string;
     meetingID: string;
+    meeting: string;
+    meeting2: string;
     company: string;
     address: string;
     address2: string;
