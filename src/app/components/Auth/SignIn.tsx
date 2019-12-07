@@ -24,6 +24,7 @@ import LinkExternal from 'components/Form/LinkExternal';
 
 interface Props {
     isValidated: boolean;
+    activationEmail: string;
     onLogin: (password: string) => void;
 }
 
@@ -79,8 +80,8 @@ const SignIn: React.SFC<Props> = props => (
                     <div>
                         In case of any questions, please contact your service
                         provider at the following email:&nbsp;
-                        <LinkExternal href="mailto:luxembourg.apla.io">
-                            luxembourg@apla.io
+                        <LinkExternal href={`mailto:${props.activationEmail}`}>
+                            {props.activationEmail}
                         </LinkExternal>
                     </div>
                 </Hint>

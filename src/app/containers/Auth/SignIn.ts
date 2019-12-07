@@ -18,19 +18,31 @@ import { loginAccount } from 'modules/auth/actions';
 
 import SignIn from 'components/Auth/SignIn';
 
+const selectNetwork = (state: IRootState) => {
+    const session = state.engine.guestSession;
+    if (!session) {
+        return undefined;
+    }
+
+    return state.storage.networks.find(l => l.uuid === session.network.uuid);
+};
+
+const selectActivationMail = (state: IRootState) => {
+    const network = selectNetwork(state);
+    return network ? network.activationEmail : '';
+};
+
 const mapStateToProps = (state: IRootState) => ({
     isValidated: Boolean(
         state.auth.wallets &&
             state.auth.wallets.length &&
             state.auth.wallets[0].address
-    )
+    ),
+    activationEmail: selectActivationMail(state)
 });
 
 const mapDispatchToProps = {
     onLogin: loginAccount.started
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

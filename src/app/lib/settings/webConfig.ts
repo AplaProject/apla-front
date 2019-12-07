@@ -24,7 +24,7 @@ const webConfig = yup.object().shape({
         fullNodes: yup.array().of(yup.string()).required().min(1),
         socketUrl: yup.string().notRequired(),
         txViewerUrl: yup.string().notRequired(),
-        activationEmail: yup.string().email().notRequired(),
+        activationEmail: yup.string().email().notRequired().default('luxembourg@apla.io'),
         activationUrl: yup.string().url().notRequired().default('https://lhoft.apla.io/request/add'),
         enableDemoMode: yup.bool(),
         disableSync: yup.bool(),
