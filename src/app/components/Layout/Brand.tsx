@@ -16,6 +16,7 @@ import React from 'react';
 import themed from 'components/Theme/themed';
 import Logo from 'components/Logo';
 import media from 'components/Theme/media';
+import DevHook from 'containers/DevHook';
 
 interface Props {
     className?: string;
@@ -26,7 +27,10 @@ const Brand: React.SFC<Props> = props => (
         <div className="brand__logo">
             <Logo />
         </div>
-        <div className="brand__content">{props.children}</div>
+        <div className="brand__content">
+            <DevHook />
+            {props.children}
+        </div>
     </div>
 );
 
@@ -46,6 +50,7 @@ export default themed(Brand)`
     }
 
     & .brand__content {
+        position: relative;
         grid-area: content;
         z-index: 2;
     }

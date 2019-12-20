@@ -26,6 +26,7 @@ import savePreconfiguredNetworksHandler from './reducers/savePreconfiguredNetwor
 import rehydrateHandler from './reducers/rehydrateHandler';
 import setMenuFoldedHandler from './reducers/setMenuFoldedHandler';
 import replaceAccountHandler from './reducers/replaceAccountHandler';
+import removeAccountsHandler from './reducers/removeAccountsHandler';
 
 export type State = {
     readonly locale: string;
@@ -54,4 +55,5 @@ export default reducerWithInitialState<State>(initialState)
     .case(actions.savePreconfiguredNetworks, savePreconfiguredNetworksHandler)
     .case(actions.localstorageInit, rehydrateHandler)
     .case(actions.setMenuFolded, setMenuFoldedHandler)
-    .case(actions.replaceAccount, replaceAccountHandler);
+    .case(actions.replaceAccount, replaceAccountHandler)
+    .case(actions.removeAccounts, removeAccountsHandler);

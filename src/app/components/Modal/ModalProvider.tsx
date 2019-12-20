@@ -54,6 +54,11 @@ import AuthAccountRemove from 'containers/Modal/AccountRemoveModal';
 import SignPdfModal from 'containers/Modal/SignPdfModal';
 import AuthLogoutModal from 'containers/Modal/AuthLogoutModal';
 import LegalModal from 'containers/Modal/LegalModal';
+import DeveloperModal from 'containers/Modal/DeveloperModal';
+import DevImportAccount from 'containers/Modal/Dev/DevImportAccount';
+import DevClearData from 'containers/Modal/Dev/DevClearData';
+import DevExportAccount from 'containers/Modal/Dev/DevExportAccount';
+import DevExportResult from './Dev/DevExportResult';
 
 const MODAL_COMPONENTS = {
     AUTHORIZE: AuthorizeModal,
@@ -90,7 +95,12 @@ const MODAL_COMPONENTS = {
     CHANGE_LOCALE: ChangeLocaleModal,
     BACKUP: BackupModal,
     SIGN_PDF: SignPdfModal,
-    LEGAL: LegalModal
+    LEGAL: LegalModal,
+    DEV_MODE: DeveloperModal,
+    DEV_IMPORT_ACCOUNT: DevImportAccount,
+    DEV_CLEAR_DATA: DevClearData,
+    DEV_EXPORT_ACCOUNT: DevExportAccount,
+    DEV_EXPORT_RESULT: DevExportResult
 };
 
 export interface IModalProviderProps {
