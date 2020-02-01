@@ -55,7 +55,7 @@ const acquireSessionEpic: Epic = (action$, store, { api }) =>
                 memberInfo =>
                     JSON.parse(memberInfo.value.member_info).personal_name ||
                     state.auth.wallet.wallet.address
-            )
+            ).catch(e => Observable.of(state.auth.wallet.wallet.address))
         )
             .flatMap(([sections, stylesheet, printStylesheet, memberName]) => {
                 const sectionsResult: { [name: string]: ISection } = {};
