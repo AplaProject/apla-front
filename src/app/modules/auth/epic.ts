@@ -34,6 +34,7 @@ import restoreAccountEpic from './epics/restoreAccountEpic';
 import loginAccountEpic from './epics/loginAccountEpic';
 import securityProcessEpic from './epics/securityProcessEpic';
 import accountProcessEpic from './epics/accountProcessEpic';
+import switchEcosystemEpic from './epics/switchEcosystemEpic';
 
 export default combineEpics(
     acquireSessionEpic,
@@ -56,5 +57,6 @@ export default combineEpics(
     restoreAccountEpic,
     loginAccountEpic,
     securityProcessEpic,
-    accountProcessEpic
+    accountProcessEpic,
+    switchEcosystemEpic
 );

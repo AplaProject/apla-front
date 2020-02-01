@@ -26,6 +26,7 @@ export const inviteEcosystem = actionCreator<{ ecosystem: string, redirectPage?:
 export const securityProcess = actionCreator.async<string, { SAMLRequest: string, RelayState: string, privateKey: string }>('SECURITY_PROCESS');
 export const accountProcess = actionCreator<{ password: string, email: string, name: string }>('ACCOUNT_PROCESS');
 export const loginAccount = actionCreator.async<string, { context: IAccountContext, privateKey: string, publicKey: string, session: ISession }, string>('LOGIN_ACCOUNT');
+export const switchEcosystem = actionCreator<number>('SWITCH_ECOSYSTEM');
 export const createAccount = actionCreator.async<{ keys: { private: string, public: string }, password: string }, IWallet>('CREATE_ACCOUNT');
 export const restoreAccount = actionCreator.async<{ privateKey: string, password: string }, IWallet>('RESTORE_ACCOUNT');
 export const createWallet = actionCreator.async<ICreateWalletCall, IWallet, string>('CREATE_WALLET');
