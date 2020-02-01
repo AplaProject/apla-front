@@ -22,7 +22,7 @@ import { modalShow, modalClose } from 'modules/modal/actions';
 import { push } from 'connected-react-router';
 import { renderPage, reloadPage } from 'modules/sections/actions';
 import { createEditorTab, loadEditorTab } from 'modules/editor/actions';
-import { backupAccount, changePassword } from 'modules/auth/actions';
+import { backupAccount, changePassword, switchEcosystem } from 'modules/auth/actions';
 import { ITransaction } from 'apla/tx';
 import txReport from 'services/upload/txReport';
 
@@ -185,6 +185,12 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService, api }) => 
                         type: 'AUTH_LOGOUT',
                         params: {}
                     }));
+                }
+                else if ('SWITCH_ECOSYSTEM' === action.payload.page.name) {
+                    const ecosystem = parseInt(action.payload.page.params.Ecosystem, 10);
+                    if (ecosystem === ecosystem) {
+                        return Observable.of(switchEcosystem(ecosystem));
+                    }
                 }
                 else if ('SIGN_PROTOCOL' === action.payload.page.name) {
                     return Observable.of(signProtocol({
