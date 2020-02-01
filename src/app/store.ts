@@ -45,12 +45,12 @@ const reducer = platform.select({
 const storageAdapters = [
     filter([
         'storage',
-        'auth.isAuthenticated',
+        // 'auth.isAuthenticated',
         'auth.isDefaultWallet',
-        'auth.session',
+        // 'auth.session',
         'auth.id',
         'auth.wallet',
-        'engine.guestSession'
+        // 'engine.guestSession'
     ])
 ];
 
