@@ -59,6 +59,7 @@ import DevImportAccount from 'containers/Modal/Dev/DevImportAccount';
 import DevClearData from 'containers/Modal/Dev/DevClearData';
 import DevExportAccount from 'containers/Modal/Dev/DevExportAccount';
 import DevExportResult from './Dev/DevExportResult';
+import AuthEcosystemModal from 'containers/Modal/AuthEcosystemModal';
 
 const MODAL_COMPONENTS = {
     AUTHORIZE: AuthorizeModal,
@@ -70,6 +71,7 @@ const MODAL_COMPONENTS = {
     AUTH_ACCOUNT_CREATED: AuthAccountCreated,
     AUTH_ACCOUNT_REMOVE: AuthAccountRemove,
     AUTH_LOGOUT: AuthLogoutModal,
+    AUTH_ECOSYSTEM: AuthEcosystemModal,
     COPY_WALLET: CopyWalletModal,
     TX_CONFIRM: TxConfirmModal,
     TX_ERROR: TxErrorModal,

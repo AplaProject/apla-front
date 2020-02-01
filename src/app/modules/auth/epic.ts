@@ -35,6 +35,7 @@ import loginAccountEpic from './epics/loginAccountEpic';
 import securityProcessEpic from './epics/securityProcessEpic';
 import accountProcessEpic from './epics/accountProcessEpic';
 import switchEcosystemEpic from './epics/switchEcosystemEpic';
+import loginNetworkEpic from './epics/loginNetworkEpic';
 
 export default combineEpics(
     acquireSessionEpic,
@@ -58,5 +59,6 @@ export default combineEpics(
     loginAccountEpic,
     securityProcessEpic,
     accountProcessEpic,
-    switchEcosystemEpic
+    switchEcosystemEpic,
+    loginNetworkEpic
 );

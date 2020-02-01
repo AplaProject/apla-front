@@ -14,7 +14,7 @@
 
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { loginAccount } from 'modules/auth/actions';
+import { loginNetwork } from 'modules/auth/actions';
 
 import SignIn from 'components/Auth/SignIn';
 
@@ -42,7 +42,7 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-    onLogin: loginAccount.started
+    onLogin: loginNetwork
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

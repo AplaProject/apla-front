@@ -56,7 +56,7 @@ const switchEcosystemEpic: Epic = (action$, store, { api }) =>
             if (!keyring.validatePrivateKey(privateKey)) {
                 return Observable.of(
                     loginAccount.failed({
-                        params: '',
+                        params: undefined,
                         error: 'E_INVALID_PASSWORD'
                     })
                 );
@@ -75,7 +75,7 @@ const switchEcosystemEpic: Epic = (action$, store, { api }) =>
                     if (!loginEcosystem) {
                         return Observable.of(
                             loginAccount.failed({
-                                params: '',
+                                params: undefined,
                                 error: 'E_INVALID_PASSWORD'
                             })
                         );
@@ -110,7 +110,7 @@ const switchEcosystemEpic: Epic = (action$, store, { api }) =>
                                 return Observable.of<Action>(
                                     push('/'),
                                     loginAccount.done({
-                                        params: '',
+                                        params: undefined,
                                         result: {
                                             session: sessionResult,
                                             privateKey,
@@ -133,7 +133,7 @@ const switchEcosystemEpic: Epic = (action$, store, { api }) =>
                             .catch(e =>
                                 Observable.of(
                                     loginAccount.failed({
-                                        params: '',
+                                        params: undefined,
                                         error: e.error
                                     })
                                 )
