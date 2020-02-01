@@ -15,7 +15,6 @@
 import { combineEpics } from 'redux-observable';
 import loginEpic from './epics/loginEpic';
 import logoutEpic from './epics/logoutEpic';
-import authorizeEpic from './epics/authorizeEpic';
 import createWalletEpic from './epics/createWalletEpic';
 import importWalletEpic from './epics/importWalletEpic';
 import authErrorEpic from './epics/authErrorEpic';
@@ -38,7 +37,6 @@ import accountProcessEpic from './epics/accountProcessEpic';
 
 export default combineEpics(
     acquireSessionEpic,
-    authorizeEpic,
     createWalletEpic,
     importWalletEpic,
     loginEpic,
