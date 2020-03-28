@@ -46,7 +46,6 @@ export default themed(Header)`
         bottom: 0;
         right: 0;
         left: 0;
-        background: url(/img/logoHeader.png) center center no-repeat;
         background-size: auto 26px;
         z-index: 0;
     }
