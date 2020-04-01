@@ -6612,10 +6612,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jsrsasign@^8.0.3:
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-8.0.3.tgz#04017b1452f5f7ef6cfff053fede4d397afc8910"
-  integrity sha1-BAF7FFL19+9s//BT/t5NOXr8iRA=
+jsrsasign@^8.0.13:
+  version "8.0.13"
+  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-8.0.13.tgz#e9ac95965c61f9e17d0bf5f9b5af2dd9f9c5e22b"
+  integrity sha512-sy8rk/6IQf9pDb8A0ZTbLmEdxUVkhhXfhmfVawS9cBOZqZJeYuSQ1zG9yO+cB8LORfj/iBM2r856Lxu+uLJYnA==
 
 keycode@^2.1.2:
   version "2.1.9"
