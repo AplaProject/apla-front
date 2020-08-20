@@ -74,7 +74,7 @@
         "url-template": "^2.0.8",
         "uuid": "^3.1.0",
         "whatwg-fetch": "^2.0.4",
-        "yup": "^0.27.0"
+        "yup": "^0.28.2"
     },
     "scripts": {
         "build-css": "node-sass-chokidar --include-path ./src/app/styles/scss --include-path ./node_modules src/app/styles/scss/sass.scss -o src/app/styles/built",
