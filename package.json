@@ -14,7 +14,7 @@
     "dependencies": {
         "bluebird": "^3.5.1",
         "centrifuge": "^1.4.6",
-        "chart.js": "^2.7.2",
+        "chart.js": "^2.9.4",
         "classnames": "^2.2.5",
         "commander": "^2.15.1",
         "connected-react-router": "^4.3.0",
